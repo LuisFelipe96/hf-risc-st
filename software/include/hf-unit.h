@@ -19,7 +19,7 @@ extern int test_counter;
 // =======================
 
 // floating point comparison precision
-#define HFUNIT_PRECISION 0.01
+#define HFUNIT_PRECISION 0.000000001
 
 // define it to show message for every test
 #define HFUNIT_VERBOSE
