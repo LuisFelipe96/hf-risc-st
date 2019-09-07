@@ -1,0 +1,117 @@
+IEEE Standard 754 Floating Point Numbers
+
+
+-----------------32 bits---------------------
+|	sign 	|	exponent	|	mantissa	| 
+|	(1 bit)	|	(8 bits)	|	(23 bits)	|
+
+---------------------------------------------------------------------
+(+)zero:		0x00000000 = 00000000 00000000 00000000 00000000	|	ZERO
+(-)zero:		0x80000000 = 10000000 00000000 00000000 00000000	|	(exponent = ZERO) e (mantissa = ZERO)
+---------------------------------------------------------------------
+1.40129846432481707092372958329E-45:								|	valores mais próximos de ZERO
+				0x00000001 = 00000000 00000000 00000000 00000001	|	positivo e negativo
+-1.40129846432481707092372958329E-45:								|	(exponent = ZERO) e (mantissa = apenas último bit em 1)
+				0x80000001 = 10000000 00000000 00000000 00000001	|
+---------------------------------------------------------------------
+1.17549421069244107548702944485E-38:								
+				0x007FFFFF = 00000000 01111111 11111111 11111111	
+-1.17549421069244107548702944485E-38:								
+				0x807FFFFF = 10000000 01111111 11111111 11111111	
+---------------------------------------------------------------------
+1.17549435082228750796873653722E-38:									
+				0x00800000 = 00000000 10000000 00000000 00000000
+-1.17549435082228750796873653722E-38:
+				0x80800000 = 10000000 10000000 00000000 00000000
+---------------------------------------------------------------------
+3.40282346638528859811704183485E38:									|	valores mais próximos de INFINITO
+				0x7F7FFFFF = 01111111 01111111 11111111 11111111	|	positivo e negativo
+-3.40282346638528859811704183485E38:								|	(exponent = 1111 1110) e (mantissa = tudo 1)
+				0xFF7FFFFF = 11111111 01111111 11111111 11111111	|	
+---------------------------------------------------------------------
+(+)infinity:	0x7F800000 = 01111111 10000000 00000000 00000000	|	INFINITO
+(-)infinity:	0xFF800000 = 11111111 10000000 00000000 00000000	|	(exponent = 1111 1111) e (mantissa = ZERO)
+---------------------------------------------------------------------
+NaN:			0x7F800001 = 01111111 10000000 00000000 00000001	|	Not a Number
+				0x7FFFFFFF = 01111111 11111111 11111111 11111111	|	(exponent = 1111 1111) e (mantissa = não ZERO)
+				0xFFFFFFFF = 11111111 11111111 11111111 11111111	|	
+---------------------------------------------------------------------
+
+https://www.geeksforgeeks.org/ieee-standard-754-floating-point-numbers/
+http://www.binaryconvert.com/result_float.html?hexadecimal=FF7FFFFF
+
+==================================================================
+
+
+File: libc.h
+
+union float_long{
+	float f;
+	int32_t l;
+	uint32_t u;
+};
+
+/* IEEE single-precision definitions */
+#define SNG_EXPBITS	8
+#define SNG_FRACBITS	23
+#define SNG_EXP_BIAS	127
+#define SNG_EXP_INFNAN	255
+#define EXCESS		126
+#define SIGNBIT		0x80000000
+#define HIDDEN		(1 << 23)
+#define SIGN(fp)	((fp) & SIGNBIT)
+#define EXP(fp)		(((fp) >> 23) & 0xFF)
+#define MANT(fp)	(((fp) & 0x7FFFFF) | HIDDEN)
+#define PACK(s,e,m)	((s) | ((e) << 23) | (m))
+
+==================================================================
+
+File: libc.c
+
+/* compare two floats */
+int32_t __cmpsf2(float a1, float a2){
+	union float_long fl1, fl2;
+	int32_t i = 0;
+
+	fl1.f = a1;
+	fl2.f = a2;
+
+	if (SIGN (fl1.l) && SIGN (fl2.l)){
+		fl1.l ^= SIGNBIT;
+		fl2.l ^= SIGNBIT;
+		i = 1;
+	}
+	if (i == 0){
+		if (fl1.l < fl2.l)
+			return (-1);
+		if (fl1.l > fl2.l)
+			return (1);
+		return (0);
+	}else{
+		if (fl1.l > fl2.l)
+			return (-1);
+		if (fl1.l < fl2.l)
+			return (1);
+		return (0);
+	}
+}
+
+==================================================================
+
+File: hf-unit.c
+
+// compare floats
+int hfunit_comp_float(float f1,float f2, char *message){
+	test_counter++;
+	if (!__cmpsf2(f1,f2))
+	{
+		failed_tests++;
+		HFUNIT_MSG_FAIL(message)
+		return 1;
+	}else{
+		HFUNIT_MSG_PASS(message)
+		return 0;
+	}
+}
+
+==================================================================
