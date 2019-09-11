@@ -2,6 +2,8 @@
 HFOS_ROOT=/home/user/Downloads/hf-risc-st
 HFOS_SW=$(HFOS_ROOT)/software/
 SIMDIR = $(HFOS_SW)/tools/sim/hf_riscv_sim/
+## use TFIXED, TFLOAT or TDOUBLE
+MATRIX_TYPE=TFLOAT
 
 include $(HFOS_SW)/defs.mk
 
@@ -16,7 +18,6 @@ crt:
 	$(GCC_$(ARCH)) -o math.o $(HFOS_SW)/lib/math.c -I$(HFOS_SW)/include
 	$(GCC_$(ARCH)) -o malloc.o $(HFOS_SW)/lib/malloc.c -I$(HFOS_SW)/include
 	$(GCC_$(ARCH)) -o hf-unit.o $(HFOS_SW)/lib/hf-unit.c -I$(HFOS_SW)/include
-
 
 link:
 	$(LD_$(ARCH)) -T$(HFOS_SW)lib/$(ARCH)/$(LD_SCRIPT) -Map test.map -N -o test.elf *.o
@@ -35,15 +36,16 @@ link:
 
 
 app: crt
-	#$(GCC_$(ARCH)) -o sort.o $(HFOS_SW)/app/sort.c -I$(HFOS_SW)/include
+	$(GCC_$(ARCH)) -o fixed.o $(HFOS_SW)lib/fixed.c -I$(HFOS_SW)/include
+	$(GCC_$(ARCH)) -o matrix.o $(HFOS_SW)/lib/matrix.c -D$(MATRIX_TYPE) -I$(HFOS_SW)/include
 	@$(MAKE) --no-print-directory link
 
 sim: $(HFOS_ROOT)/tools/sim/hf_riscv_sim/hf_riscv_sim.c
 	gcc -o hf_riscv_sim $(HFOS_ROOT)/tools/sim/hf_riscv_sim/*.c
 
 test: crt sim 
-	$(GCC_$(ARCH)) -o test.o test.c -I$(HFOS_SW)/include  # compila o teste
-	$(GCC_$(ARCH)) -o tester.o tester.c -I$(HFOS_SW)/include  # compila o testador
+	$(GCC_$(ARCH)) -o test.o test.c     -D$(MATRIX_TYPE) -I$(HFOS_SW)/include  # compila o teste
+	$(GCC_$(ARCH)) -o tester.o tester.c -D$(MATRIX_TYPE) -I$(HFOS_SW)/include  # compila o testador
 	@$(MAKE) --no-print-directory app
 	./hf_riscv_sim ./code.bin
 

@@ -1,5 +1,6 @@
 #include <hf-risc.h>
 #include <hf-unit.h>
+#include <fixed.h>
 
 // function under test 
 fixed_t fixed_exp(fixed_t arg);
@@ -16,6 +17,6 @@ void hfunit_run_tests(){
 // place here a nice description for each test
 void fixed_exp_test(){
 	fixed_t entrada = 2;
-	printf("%d\n", fixed_exp(entrada));
+	fix_print(fixed_exp(entrada));
 
 }

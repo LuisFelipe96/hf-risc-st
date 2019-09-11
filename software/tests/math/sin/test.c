@@ -154,7 +154,7 @@ void sin_180_degree_test(){
 void sin_330_degree_test(){
 	float degree = 330.0;	
 	float radians;
-	float expected = 0.5;
+	float expected = -0.5f;
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
