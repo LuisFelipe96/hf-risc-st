@@ -2,7 +2,7 @@
 #include <hf-unit.h>
 
 const float pi = 3.14159265359;
-const int precision = 10;
+const int digits = 10;
 
 // function under test 
 float sin(float arg);
@@ -36,16 +36,16 @@ void sin_0_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(0)");
 }
@@ -57,16 +57,16 @@ void sin_1_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(1)");
 }
@@ -77,16 +77,16 @@ void sin_90_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(90)");
 }
@@ -97,16 +97,16 @@ void sin_179_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(179)");
 }
@@ -117,16 +117,16 @@ void sin_181_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(181)");
 }
@@ -137,16 +137,16 @@ void sin_180_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(180)");
 }
@@ -158,17 +158,16 @@ void sin_330_degree_test(){
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
-	ftoa(radians, buf, precision);
+	ftoa(radians, buf, digits);
 	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = sin(radians);
 	printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
 	printBits(sizeof(float),&output);
-	ftoa(expected, buf, precision);
+	ftoa(expected, buf, digits);
 	printf("expected: %s\n", buf);
-	ftoa(output, buf, precision);
+	ftoa(output, buf, digits);
 	printf("output: %s\n", buf);
 	hfunit_comp_float(output,expected, "sin(330)");
 }
-
