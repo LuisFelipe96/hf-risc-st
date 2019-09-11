@@ -18,7 +18,9 @@ void mat_compare(struct Matrix  *a, struct Matrix  *b, int row, int col){
 	for (x=0; x<row; x++){
 		for(y=0; y<col;y++){
 			print_float(a->str[x][y]);
+			print_float(b->str[x][y]);
 			printf("\n");
+			hfunit_comp_float(a->str[x][y],b->str[x][y],"Test transposta");
 			/*if(a->str != b->str){
 				printf("ERRO\n");
 				flag=1;

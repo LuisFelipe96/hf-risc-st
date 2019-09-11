@@ -41,7 +41,7 @@ void hfunit_run_tests(){
 	cos_test15();//300
 	cos_test16();//315
 	cos_test17();//330
-*/
+/**/
 }
 
 // place here a nice description for each test
