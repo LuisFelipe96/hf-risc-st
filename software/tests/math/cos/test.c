@@ -109,7 +109,7 @@ void cos_90_degree_test(){
 void cos_89_degree_test(){
 	float degree = 89.0;	
 	float radians;
-	float expected = 0.017452;
+	float expected = 0.017452f;
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
@@ -129,7 +129,7 @@ void cos_89_degree_test(){
 void cos_91_degree_test(){
 	float degree = 91.0;	
 	float radians;
-	float expected = -0.017452;
+	float expected = -0.017452f;
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
