@@ -50,7 +50,19 @@ int hfunit_comp_vector(void *v1,void *v2, int size, char* message){
 // compare floats
 int hfunit_comp_float(float f1,float f2, char *message){
 	test_counter++;
-	if (!(((f1 -f2 - HFUNIT_PRECISION) < 0.0f) && ((f1 -f2 + HFUNIT_PRECISION) > 0.0f)))
+	float precision = 0.00001;//0x00800001;
+
+//	if (!(((f1 - precision) < f2) && ((f1 + precision) > f2)))
+
+	float a = f1 -f2 - precision;
+	float b = f1 -f2 + precision;
+	printf("a: ");
+	print_float(a);
+	printf("\n");
+	printf("b: ");
+	print_float(b);
+	printf("\n");
+	if (!(((f1 -f2 - precision) < 0.0f) && ((f1 -f2 + precision) > 0.0f)))
 	{
 		failed_tests++;
 		HFUNIT_MSG_FAIL(message)
