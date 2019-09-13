@@ -164,6 +164,8 @@ Seções de entrada descartadas
  .text          0x0000000000000000        0x0 math.o
  .data          0x0000000000000000        0x0 math.o
  .bss           0x0000000000000000        0x0 math.o
+ .text.xatan    0x0000000000000000      0x15c math.o
+ .text.satan    0x0000000000000000      0x114 math.o
  .text.frexp.part.1
                 0x0000000000000000       0x34 math.o
  .text.fabs     0x0000000000000000       0x3c math.o
@@ -180,6 +182,7 @@ Seções de entrada descartadas
  .text.pow      0x0000000000000000      0x1e8 math.o
  .text.sin      0x0000000000000000        0xc math.o
  .text.tan      0x0000000000000000      0x2c8 math.o
+ .text.atan     0x0000000000000000       0x68 math.o
  .text.atan2    0x0000000000000000      0x190 math.o
  .text.asin     0x0000000000000000      0x158 math.o
  .text.acos     0x0000000000000000       0x7c math.o
@@ -208,15 +211,13 @@ Seções de entrada descartadas
                 0x0000000000000000       0x1c math.o
  .rodata.tan.cst8
                 0x0000000000000000       0x18 math.o
+ .rodata.xatan.cst4
+                0x0000000000000000       0x24 math.o
  .text          0x0000000000000000        0x0 test.o
  .data          0x0000000000000000        0x0 test.o
  .bss           0x0000000000000000        0x0 test.o
- .text.cos_test10
-                0x0000000000000000       0x98 test.o
- .rodata.cos_test10.cst4
+ .sdata2.digits
                 0x0000000000000000        0x4 test.o
- .rodata.cos_test10.str1.4
-                0x0000000000000000        0xb test.o
  .sdata2.pi     0x0000000000000000        0x4 test.o
  .text          0x0000000000000000        0x0 tester.o
  .data          0x0000000000000000        0x0 tester.o
@@ -235,7 +236,7 @@ Script do link-editor e mapa de memória
                 0x000000004ffffffc                _stack = 0x4ffffffc
                 0x0000000000000000                . = 0x0
 
-.text           0x0000000040000000     0x28e4
+.text           0x0000000040000000     0x2278
  *(.text.init)
                 0x0000000040000000                _text = .
  *(.text)
@@ -376,284 +377,182 @@ Script do link-editor e mapa de memória
  .text.__floatsisf
                 0x00000000400013a4       0x90 libc.o
                 0x00000000400013a4                __floatsisf
- .text.xatan    0x0000000040001434      0x10c math.o
- .text.satan    0x0000000040001540       0xe8 math.o
- .text.modf     0x0000000040001628       0xb8 math.o
-                0x0000000040001628                modf
- .text.sinus    0x00000000400016e0      0x1f0 math.o
- .text.cos      0x00000000400018d0       0x3c math.o
-                0x00000000400018d0                cos
- .text.atan     0x000000004000190c       0x5c math.o
-                0x000000004000190c                atan
- .text.cos_0_degree_test
-                0x0000000040001968       0xd4 test.o
-                0x0000000040001968                cos_0_degree_test
+ .text.modf     0x0000000040001434       0xb8 math.o
+                0x0000000040001434                modf
+ .text.sinus    0x00000000400014ec      0x1f0 math.o
+ .text.cos      0x00000000400016dc       0x3c math.o
+                0x00000000400016dc                cos
+ .text.cos_infinity_test_1
+                0x0000000040001718       0xdc test.o
+                0x0000000040001718                cos_infinity_test_1
+ .text.cos_infinity_test_2
+                0x00000000400017f4       0xdc test.o
+                0x00000000400017f4                cos_infinity_test_2
+ .text.cos_zero_test_1
+                0x00000000400018d0       0xd0 test.o
+                0x00000000400018d0                cos_zero_test_1
+ .text.cos_zero_test_2
+                0x00000000400019a0       0xe0 test.o
+                0x00000000400019a0                cos_zero_test_2
+ .text.cos_zero_test_3
+                0x0000000040001a80       0xe0 test.o
+                0x0000000040001a80                cos_zero_test_3
  .text.cos_1_degree_test
-                0x0000000040001a3c       0xe4 test.o
-                0x0000000040001a3c                cos_1_degree_test
- .text.cos_90_degree_test
-                0x0000000040001b20       0xe0 test.o
-                0x0000000040001b20                cos_90_degree_test
- .text.cos_89_degree_test
-                0x0000000040001c00       0xe4 test.o
-                0x0000000040001c00                cos_89_degree_test
- .text.cos_91_degree_test
-                0x0000000040001ce4       0xe4 test.o
-                0x0000000040001ce4                cos_91_degree_test
- .text.cos_180_degree_test
-                0x0000000040001dc8       0xe4 test.o
-                0x0000000040001dc8                cos_180_degree_test
- .text.cos_300_degree_test
-                0x0000000040001eac       0xe4 test.o
-                0x0000000040001eac                cos_300_degree_test
- .text.cos_test2
-                0x0000000040001f90       0x9c test.o
-                0x0000000040001f90                cos_test2
- .text.cos_test3
-                0x000000004000202c       0x7c test.o
-                0x000000004000202c                cos_test3
- .text.cos_test4
-                0x00000000400020a8       0x7c test.o
-                0x00000000400020a8                cos_test4
- .text.cos_test5
-                0x0000000040002124       0x7c test.o
-                0x0000000040002124                cos_test5
- .text.cos_test6
-                0x00000000400021a0       0xc0 test.o
-                0x00000000400021a0                cos_test6
- .text.cos_test7
-                0x0000000040002260       0xc0 test.o
-                0x0000000040002260                cos_test7
- .text.cos_test8
-                0x0000000040002320       0x7c test.o
-                0x0000000040002320                cos_test8
- .text.cos_test9
-                0x000000004000239c       0x7c test.o
-                0x000000004000239c                cos_test9
- .text.cos_test11
-                0x0000000040002418       0x7c test.o
-                0x0000000040002418                cos_test11
- .text.cos_test12
-                0x0000000040002494       0x7c test.o
-                0x0000000040002494                cos_test12
- .text.cos_test13
-                0x0000000040002510       0xc0 test.o
-                0x0000000040002510                cos_test13
- .text.cos_test14
-                0x00000000400025d0       0x78 test.o
-                0x00000000400025d0                cos_test14
- .text.cos_test15
-                0x0000000040002648       0x98 test.o
-                0x0000000040002648                cos_test15
- .text.cos_test16
-                0x00000000400026e0       0x7c test.o
-                0x00000000400026e0                cos_test16
- .text.cos_test17
-                0x000000004000275c       0x7c test.o
-                0x000000004000275c                cos_test17
+                0x0000000040001b60       0xe4 test.o
+                0x0000000040001b60                cos_1_degree_test
+ .text.cos_90_degrees_test
+                0x0000000040001c44       0xe0 test.o
+                0x0000000040001c44                cos_90_degrees_test
+ .text.cos_89_degrees_test
+                0x0000000040001d24       0xe4 test.o
+                0x0000000040001d24                cos_89_degrees_test
+ .text.cos_180_degrees_test
+                0x0000000040001e08       0xe4 test.o
+                0x0000000040001e08                cos_180_degrees_test
+ .text.cos_300_degrees_test
+                0x0000000040001eec       0xe4 test.o
+                0x0000000040001eec                cos_300_degrees_test
+ .text.cos_Neg90_degrees_test
+                0x0000000040001fd0       0xe0 test.o
+                0x0000000040001fd0                cos_Neg90_degrees_test
+ .text.cos_720_degrees_test
+                0x00000000400020b0       0xe4 test.o
+                0x00000000400020b0                cos_720_degrees_test
  .text.hfunit_run_tests
-                0x00000000400027d8       0x68 test.o
-                0x00000000400027d8                hfunit_run_tests
+                0x0000000040002194       0x40 test.o
+                0x0000000040002194                hfunit_run_tests
  .text.main_test
-                0x0000000040002840       0xa4 tester.o
-                0x0000000040002840                main_test
-                0x00000000400028e4                _etext = .
+                0x00000000400021d4       0xa4 tester.o
+                0x00000000400021d4                main_test
+                0x0000000040002278                _etext = .
 
-.rela.dyn       0x00000000400028e4        0x0
- .rela.text     0x00000000400028e4        0x0 crt0.o
+.rela.dyn       0x0000000040002278        0x0
+ .rela.text     0x0000000040002278        0x0 crt0.o
  .rela.data.gpio_vector
-                0x00000000400028e4        0x0 crt0.o
+                0x0000000040002278        0x0 crt0.o
  .rela.data.irq_vector
-                0x00000000400028e4        0x0 crt0.o
+                0x0000000040002278        0x0 crt0.o
  .rela.data.timer_vector
-                0x00000000400028e4        0x0 crt0.o
+                0x0000000040002278        0x0 crt0.o
 
-.data           0x00000000400028e4      0x52c
-                0x00000000400028e4                _rodata = .
+.data           0x0000000040002278      0x408
+                0x0000000040002278                _rodata = .
  *(.rdata)
  *(.rodata)
  *(.rodata.*)
  .rodata.hfunit_comp_float.cst4
-                0x00000000400028e4        0x4 hf-unit.o
+                0x0000000040002278        0x4 hf-unit.o
  .rodata.hfunit_comp_vector.str1.4
-                0x00000000400028e8       0x2e hf-unit.o
- *fill*         0x0000000040002916        0x2 
+                0x000000004000227c       0x2e hf-unit.o
+ *fill*         0x00000000400022aa        0x2 
  .rodata.printBits.str1.4
-                0x0000000040002918        0x3 hf-unit.o
+                0x00000000400022ac        0x3 hf-unit.o
                                           0x7 (tamanho de relaxar)
- *fill*         0x000000004000291b        0x1 
+ *fill*         0x00000000400022af        0x1 
  .rodata.irq0_handler
-                0x000000004000291c       0x84 interrupt.o
+                0x00000000400022b0       0x84 interrupt.o
  .rodata.dummy_handler.str1.4
-                0x00000000400029a0        0x5 interrupt.o
- *fill*         0x00000000400029a5        0x3 
+                0x0000000040002334        0x5 interrupt.o
+ *fill*         0x0000000040002339        0x3 
  .rodata.exception_handler.str1.4
-                0x00000000400029a8       0x2c interrupt.o
+                0x000000004000233c       0x2c interrupt.o
  .rodata.irq0_handler.str1.4
-                0x00000000400029d4       0x25 interrupt.o
- *fill*         0x00000000400029f9        0x3 
+                0x0000000040002368       0x25 interrupt.o
+ *fill*         0x000000004000238d        0x3 
  .rodata.vsprintf
-                0x00000000400029fc       0x84 libc.o
+                0x0000000040002390       0x84 libc.o
  .rodata.__divsf3.cst4
-                0x0000000040002a80        0x8 libc.o
+                0x0000000040002414        0x8 libc.o
  .rodata.itoa.part.1.str1.4
-                0x0000000040002a88       0x48 libc.o
+                0x000000004000241c       0x48 libc.o
  .rodata.vsprintf.str1.4
-                0x0000000040002ad0       0x19 libc.o
- *fill*         0x0000000040002ae9        0x3 
+                0x0000000040002464       0x19 libc.o
+ *fill*         0x000000004000247d        0x3 
  .rodata.satan.cst4
-                0x0000000040002aec       0x14 math.o
+                0x0000000040002480       0x14 math.o
  .rodata.sinus.cst4
-                0x0000000040002b00       0x34 math.o
- .rodata.xatan.cst4
-                0x0000000040002b34       0x24 math.o
- .rodata.cos_0_degree_test.cst4
-                0x0000000040002b58        0x4 test.o
- .rodata.cos_0_degree_test.str1.4
-                0x0000000040002b58       0x4b test.o
- *fill*         0x0000000040002ba3        0x1 
- .rodata.cos_180_degree_test.cst4
-                0x0000000040002ba4        0x8 test.o
- .rodata.cos_180_degree_test.str1.4
-                0x0000000040002bac        0x9 test.o
- *fill*         0x0000000040002bb5        0x3 
+                0x0000000040002494       0x34 math.o
+ .rodata.cos_180_degrees_test.cst4
+                0x00000000400024c8        0x8 test.o
  .rodata.cos_1_degree_test.cst4
-                0x0000000040002bb8        0x8 test.o
+                0x00000000400024d0        0x8 test.o
  .rodata.cos_1_degree_test.str1.4
-                0x0000000040002bc0        0x7 test.o
- *fill*         0x0000000040002bc7        0x1 
- .rodata.cos_300_degree_test.cst4
-                0x0000000040002bc8        0x8 test.o
- .rodata.cos_300_degree_test.str1.4
-                0x0000000040002bd0        0x9 test.o
- *fill*         0x0000000040002bd9        0x3 
- .rodata.cos_89_degree_test.cst4
-                0x0000000040002bdc        0x8 test.o
- .rodata.cos_89_degree_test.str1.4
-                0x0000000040002be4        0x8 test.o
- .rodata.cos_90_degree_test.cst4
-                0x0000000040002bec        0x4 test.o
- .rodata.cos_90_degree_test.str1.4
-                0x0000000040002bec        0x8 test.o
- .rodata.cos_91_degree_test.cst4
-                0x0000000040002bf4        0x8 test.o
- .rodata.cos_91_degree_test.str1.4
-                0x0000000040002bfc        0x8 test.o
- .rodata.cos_test11.cst4
-                0x0000000040002c04        0x4 test.o
- .rodata.cos_test11.str1.4
-                0x0000000040002c08        0xb test.o
- *fill*         0x0000000040002c13        0x1 
- .rodata.cos_test12.cst4
-                0x0000000040002c14        0x4 test.o
- .rodata.cos_test12.str1.4
-                0x0000000040002c18        0xb test.o
- *fill*         0x0000000040002c23        0x1 
- .rodata.cos_test13.cst4
-                0x0000000040002c24        0x4 test.o
- .rodata.cos_test13.str1.4
-                0x0000000040002c28        0xb test.o
- *fill*         0x0000000040002c33        0x1 
- .rodata.cos_test14.cst4
-                0x0000000040002c34        0x4 test.o
- .rodata.cos_test14.str1.4
-                0x0000000040002c38        0xb test.o
- *fill*         0x0000000040002c43        0x1 
- .rodata.cos_test15.cst4
-                0x0000000040002c44        0x4 test.o
- .rodata.cos_test15.str1.4
-                0x0000000040002c48        0xb test.o
- *fill*         0x0000000040002c53        0x1 
- .rodata.cos_test16.cst4
-                0x0000000040002c54        0x4 test.o
- .rodata.cos_test16.str1.4
-                0x0000000040002c58        0xb test.o
- *fill*         0x0000000040002c63        0x1 
- .rodata.cos_test17.cst4
-                0x0000000040002c64        0x4 test.o
- .rodata.cos_test17.str1.4
-                0x0000000040002c68        0xb test.o
- *fill*         0x0000000040002c73        0x1 
- .rodata.cos_test2.cst4
-                0x0000000040002c74        0x4 test.o
- .rodata.cos_test2.str1.4
-                0x0000000040002c78       0x3b test.o
- *fill*         0x0000000040002cb3        0x1 
- .rodata.cos_test3.cst4
-                0x0000000040002cb4        0x8 test.o
- .rodata.cos_test3.str1.4
-                0x0000000040002cbc        0xa test.o
- *fill*         0x0000000040002cc6        0x2 
- .rodata.cos_test4.cst4
-                0x0000000040002cc8        0x8 test.o
- .rodata.cos_test4.str1.4
-                0x0000000040002cd0        0xa test.o
- *fill*         0x0000000040002cda        0x2 
- .rodata.cos_test5.cst4
-                0x0000000040002cdc        0x4 test.o
- .rodata.cos_test5.str1.4
-                0x0000000040002ce0        0xa test.o
- *fill*         0x0000000040002cea        0x2 
- .rodata.cos_test6.cst4
-                0x0000000040002cec        0x4 test.o
- .rodata.cos_test6.str1.4
-                0x0000000040002cf0        0xa test.o
- *fill*         0x0000000040002cfa        0x2 
- .rodata.cos_test7.cst4
-                0x0000000040002cfc        0x8 test.o
- .rodata.cos_test7.str1.4
-                0x0000000040002d04        0xb test.o
- *fill*         0x0000000040002d0f        0x1 
- .rodata.cos_test8.cst4
-                0x0000000040002d10        0x8 test.o
- .rodata.cos_test8.str1.4
-                0x0000000040002d18        0xb test.o
- *fill*         0x0000000040002d23        0x1 
- .rodata.cos_test9.cst4
-                0x0000000040002d24        0x8 test.o
- .rodata.cos_test9.str1.4
-                0x0000000040002d2c        0xb test.o
- *fill*         0x0000000040002d37        0x1 
+                0x00000000400024d8       0x20 test.o
+ .rodata.cos_300_degrees_test.cst4
+                0x00000000400024f8        0x8 test.o
+ .rodata.cos_720_degrees_test.cst4
+                0x0000000040002500        0x4 test.o
+ .rodata.cos_89_degrees_test.cst4
+                0x0000000040002504        0x8 test.o
+ .rodata.cos_90_degrees_test.cst4
+                0x000000004000250c        0x4 test.o
+ .rodata.cos_Neg90_degrees_test.cst4
+                0x000000004000250c        0x4 test.o
+ .rodata.cos_infinity_test_1.cst4
+                0x0000000040002510        0x4 test.o
+ .rodata.cos_infinity_test_1.str1.4
+                0x0000000040002514       0x47 test.o
+ *fill*         0x000000004000255b        0x1 
+ .rodata.cos_infinity_test_2.cst4
+                0x000000004000255c        0x4 test.o
+ .rodata.cos_infinity_test_2.str1.4
+                0x0000000040002560        0xf test.o
+ .rodata.cos_zero_test_1.cst4
+                0x000000004000256f        0x4 test.o
+ *fill*         0x000000004000256f        0x1 
+ .rodata.cos_zero_test_1.str1.4
+                0x0000000040002570        0x7 test.o
+ *fill*         0x0000000040002577        0x1 
+ .rodata.cos_zero_test_2.cst4
+                0x0000000040002578        0x4 test.o
+ .rodata.cos_zero_test_2.str1.4
+                0x000000004000257c       0x13 test.o
+ *fill*         0x000000004000258f        0x1 
+ .rodata.cos_zero_test_3.cst4
+                0x0000000040002590        0x4 test.o
+ .rodata.cos_zero_test_3.str1.4
+                0x0000000040002594       0x13 test.o
+ *fill*         0x00000000400025a7        0x1 
  .rodata.main_test.str1.4
-                0x0000000040002d38       0x68 tester.o
-                0x0000000040002da0                _erodata = .
-                0x0000000040002da0                _data = .
+                0x00000000400025a8       0x68 tester.o
+                0x0000000040002610                _erodata = .
+                0x0000000040002610                _data = .
  *(.data)
  *(.data.*)
  .data.gpio_vector
-                0x0000000040002da0       0x10 interrupt.o
-                0x0000000040002da0                gpio_vector
+                0x0000000040002610       0x10 interrupt.o
+                0x0000000040002610                gpio_vector
  .data.irq_vector
-                0x0000000040002db0       0x20 interrupt.o
-                0x0000000040002db0                irq_vector
+                0x0000000040002620       0x20 interrupt.o
+                0x0000000040002620                irq_vector
  .data.timer_vector
-                0x0000000040002dd0       0x40 interrupt.o
-                0x0000000040002dd0                timer_vector
-                0x0000000040003610                _gp = (. + 0x800)
+                0x0000000040002640       0x40 interrupt.o
+                0x0000000040002640                timer_vector
+                0x0000000040002e80                _gp = (. + 0x800)
  *(.sdata)
  *(.sdata.*)
-                0x0000000040002e10                . = ALIGN (0x10)
- *fill*         0x0000000040002e10        0x0 
-                0x0000000040002e10                _edata = .
+                0x0000000040002680                . = ALIGN (0x10)
+ *fill*         0x0000000040002680        0x0 
+                0x0000000040002680                _edata = .
 
-.bss            0x0000000040002e10        0xc
-                0x0000000040002e10                _bss_start = .
+.bss            0x0000000040002680        0xc
+                0x0000000040002680                _bss_start = .
  *(.sbss)
  *(.sbss.*)
  .sbss.executed_tests
-                0x0000000040002e10        0x4 tester.o
-                0x0000000040002e10                executed_tests
+                0x0000000040002680        0x4 tester.o
+                0x0000000040002680                executed_tests
  .sbss.failed_tests
-                0x0000000040002e14        0x4 tester.o
-                0x0000000040002e14                failed_tests
+                0x0000000040002684        0x4 tester.o
+                0x0000000040002684                failed_tests
  .sbss.test_counter
-                0x0000000040002e18        0x4 tester.o
-                0x0000000040002e18                test_counter
+                0x0000000040002688        0x4 tester.o
+                0x0000000040002688                test_counter
  *(.bss)
  *(.bss.*)
-                0x0000000040002e1c                . = ALIGN (0x4)
-                0x0000000040002e1c                _bss_end = .
-                0x0000000040002e1c                _end = .
+                0x000000004000268c                . = ALIGN (0x4)
+                0x000000004000268c                _bss_end = .
+                0x000000004000268c                _end = .
 LOAD crt0.o
 LOAD hf-unit.o
 LOAD interrupt.o
