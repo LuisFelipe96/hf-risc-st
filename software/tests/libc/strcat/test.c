@@ -1,17 +1,20 @@
 #include <hf-risc.h>
 #include <hf-unit.h>
 
-union ufloat{
-	float f;
-	unsigned u;
 
-};
 // function under test 
-float sqrt(float arg);
+int8_t *strcat(int8_t *dst, const int8_t *src);
 
 // list of individual tests
-void cos1_test();
-void test();
+void strcat_test1();
+void strcat_test2();
+void strcat_test3();
+void strcat_test4();
+void strcat_test5();
+void strcat_test6();
+void strcat_test7();
+void strcat_test8();
+void strcat_test9();
 
 // main test
 void hfunit_run_tests(){
@@ -24,10 +27,9 @@ void hfunit_run_tests(){
 	strcat_test7();
 	strcat_test8();
 	strcat_test9();
-	//test();
 }
 
-// place here a nice description for each test
+
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
@@ -204,9 +206,3 @@ void strcat_test9(){
 	//printf("%s",dest);
 	hfunit_comp_vector(dest,expected,sizeof(char)*7, "strcat - Classe 9");
 }
-// place here a nice description for each test
-/*void sqrt4_test(){
-	float v = sqrt(4.0);
-	float expected = 2.0;
-	hfunit_comp_float(v,expected, "sqrt(4.0)");
-}*/
