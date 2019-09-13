@@ -11,6 +11,7 @@ fixed_t fix_sqrt(fixed_t arg);
 void fix_sqrt_test();
 void fix_sqrt_test0();
 void fix_sqrt_test1();
+void fix_sqrt_test2();
 void fix_sqrt_testA();
 void fix_sqrt_testNEG1();
 void fix_sqrt_testMax();
@@ -20,6 +21,7 @@ void hfunit_run_tests(){
 	//fix_sqrt_test();
 	fix_sqrt_test0();
 	fix_sqrt_test1();
+	fix_sqrt_test2();
 	fix_sqrt_testA();
 	fix_sqrt_testNEG1();
 	fix_sqrt_testMax();
@@ -115,7 +117,22 @@ void fix_sqrt_test1(){
 	hfunit_comp_fixed(saida,fix_val(1.0),"fix_sqrt1");
 
 }
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    2   |    1.41421356237               |
+|--------|--------------------------------|
+*/
+void fix_sqrt_test2(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(2.0);
+	saida=fix_sqrt(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(1.41421356237),"fix_sqrt2");
 
+}
 /*
 |Entrada |         Saida Esperada         | 
 |--------|--------------------------------|
@@ -159,7 +176,7 @@ void fix_sqrt_testNEG1(){
 void fix_sqrt_testMax(){
 	fixed_t entrada;
 	fixed_t saida;
-	entrada = fix_val(22.1807097779);
+	entrada = fix_val(4294967295.9999);
 	saida=fix_sqrt(entrada);
 	/*printf("\nMAX:");
 	fix_print(entrada);
@@ -168,5 +185,5 @@ void fix_sqrt_testMax(){
 	printf(" ");
 	fix_print(fix_sqrt(entrada));
 	printf("\n");*/
-	hfunit_comp_fixed(saida,fix_val(4.70964009006),"fix_sqrtMAX");
+	hfunit_comp_fixed(saida,fix_val(65536),"fix_sqrtMAX");
 }
