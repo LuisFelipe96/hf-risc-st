@@ -32,6 +32,8 @@ void hfunit_run_tests(){
 	cos_89_degrees_test();
 	cos_180_degrees_test();
 	cos_300_degrees_test();
+	cos_Neg90_degrees_test();
+	cos_720_degrees_test();
 }
 
 /*	
@@ -274,6 +276,55 @@ void cos_300_degrees_test(){
 	float degree = 300.0;
 	float radians;
 	float expected = 0.5;
+	float output;
+	char buf[30];
+	radians = degree * pi / 180;
+	ftoa(radians, buf, digits);
+	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	output = cos(radians);
+	printf(" ");
+	printBits(sizeof(float),&expected);
+	printf("=");
+	printBits(sizeof(float),&output);
+	ftoa(expected, buf, digits);
+	printf("expected: %s\n", buf);
+	ftoa(output, buf, digits);
+	printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)");
+}
+/*
+Entrada:-90° = - pi rad
+Resultado esperado: 0
+*/
+void cos_Neg90_degrees_test(){
+	float degree = -90.0;
+	float radians;
+	float expected = 0.0;
+	float output;
+	char buf[30];
+	radians = degree * pi / 180;
+	ftoa(radians, buf, digits);
+	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	output = cos(radians);
+	printf(" ");
+	printBits(sizeof(float),&expected);
+	printf("=");
+	printBits(sizeof(float),&output);
+	ftoa(expected, buf, digits);
+	printf("expected: %s\n", buf);
+	ftoa(output, buf, digits);
+	printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)");
+}
+
+/*
+Entrada: 720° = 720*pi/180 rad
+Resultado esperado: 1.0
+*/
+void cos_720_degrees_test(){
+	float degree = 720.0;
+	float radians;
+	float expected = 1.0;
 	float output;
 	char buf[30];
 	radians = degree * pi / 180;
