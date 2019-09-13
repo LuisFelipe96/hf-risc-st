@@ -1,110 +1,172 @@
 #include <hf-risc.h>
 #include <hf-unit.h>
+#include <fixed.h>
+#include <mat_type.h> 
 
-union ufloat{
-	float f;
-	unsigned u;
-
-};
+typedef fixed_t typ_var;
 // function under test 
-float sqrt(float arg);
+fixed_t fix_sqrt(fixed_t arg);
 
 // list of individual tests
-void cos1_test();
-void test();
+void fix_sqrt_test();
+void fix_sqrt_test0();
+void fix_sqrt_test1();
+void fix_sqrt_testA();
+void fix_sqrt_testNEG1();
+void fix_sqrt_testMax();
 
 // main test
 void hfunit_run_tests(){
-	memcpy_test1();
-	memcpy_test2();
-	memcpy_test3();
-	memcpy_test4();
-	memcpy_test5();
-	memcpy_test6();
-	memcpy_test7();
-	memcpy_test8();
-	memcpy_test9();
-	//test();
+	//fix_sqrt_test();
+	fix_sqrt_test0();
+	fix_sqrt_test1();
+	fix_sqrt_testA();
+	fix_sqrt_testNEG1();
+	fix_sqrt_testMax();
 }
 
-// place here a nice description for each test
-void memcpy_test1(){
-	char orig[6] = "A";
-	char dest[6];
-	char expected[6] = "A";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 1");
-}
-void memcpy_test2(){
-	char orig[6] = "CD";
-	char dest[6];
-	char expected[6] = "CD";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 2");
-}
+/*
+|Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
+|--------|--------------------------------|-----------------------------------|
+|Entrada | qualquer numero real positivo  |  numero negativo		          |
+|--------|--------------------------------|-----------------------------------|
+*/
+void fix_sqrt_test(){
+	fixed_t entrada = fix_val(0.0);
+	fixed_t saida;
+	//fix_print(fix_sqrt(entrada));
+	saida=fix_sqrt(entrada);
+	printBits(sizeof(entrada),entrada);
+	hfunit_comp_fixed(saida,fix_val(1.0),"fix_sqrt0");
+	entrada = fix_val(1.0);
+	saida=fix_sqrt(entrada);
+	printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(2.718261),"fix_sqrt1");
+	entrada = fix_val(2.0);
+	saida=fix_sqrt(entrada);
+	printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(7.3890561),"fix_sqrt1");
+	entrada = fix_val(3.0);
+	saida=fix_sqrt(entrada);
+	printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(20.085537),"fix_sqrt1");
+	entrada = fix_val(0xFFFFFFFFFFFFFFFF);//FFFFFFFFFFFFFFFF
+	saida=fix_sqrt(entrada);
+	printBits(sizeof(entrada),entrada);
+	printf("\nMIN:");
+	fix_print(entrada);
+	printf(" ");
+	fix_print(fix_sqrt(entrada));
+	entrada = fix_val(0x7FFFFFFFFFFFFFFF);
+	saida=fix_sqrt(entrada);
+	printf("\nMAX:");
+	fix_print(entrada);
+	printBits(sizeof(entrada),entrada);
+	printf(" ");
+	fix_print(fix_sqrt(entrada));
+	printf("\n");
+	//fix_print(fix_val(2.718261)+fix_val(0.001));
+	//fix_print(fix_val(2.718261)-fix_val(0.001));
+	/*if(fix_val(1.0)<fix_val(2.0)){
+		printf(":)\n");
+	}*/
+	//fix_print(fix_val(2.718261)-fix_sqrt(fix_val(1.0)));
+	/*if((fix_sqrt(fix_val(1.0)) <= fix_val(2.718261)+fix_sqrt(0.001)) && (fix_sqrt(entrada) >= fix_val(2.718261)-fix_val(0.001))){
+		printf("ok\n");
+	}else{
+		printf("fail\n");	
 
-void memcpy_test3(){
-	char orig[6] = "ghb";
-	char dest[6];
-	char expected[6] = "ghb";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 3");
-
-}
-
-void memcpy_test4(){
-	char orig[6] = "H";
-	char dest[6] = "";
-	char expected[6] = "H";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 4");
-}
-
-void memcpy_test5(){
-	char orig[6] = "";
-	char dest[6];
-	char expected[6] = "";
-	memcpy(dest,orig,sizeof(char)*6);	
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 5");
-}
-
-void memcpy_test6(){
-	char orig[6] = "\0";
-	char dest[6];
-	char expected[6] = "";
-	memcpy(dest,orig,sizeof(char)*6);	
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 6");
-}
-
-void memcpy_test7(){
-	char orig[6] = "@";
-	char dest[6];
-	char expected[6] = "@";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 7");
+	}/**/
+	
 }
 
-void memcpy_test8(){
-	char orig[6] = "IJK";
-	char dest[6];
-	char expected[6] = "IJK";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 8");
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    0   |             0.0                |
+|--------|--------------------------------|
+*/
+void fix_sqrt_test0(){
+	fixed_t entrada = fix_val(0.0);
+	fixed_t saida;
+	//fix_print(fix_sqrt(entrada));
+	saida=fix_sqrt(entrada);
+	//printBits(sizeof(entrada),entrada);
+	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrt0");
+	
 }
 
-void memcpy_test9(){
-	char orig[6] = "OPQRSTU";
-	char dest[6];
-	char expected[7] = "OPQRSTU";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 9");
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    1   |        		1.0               |
+|--------|--------------------------------|
+*/
+void fix_sqrt_test1(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(1.0);
+	saida=fix_sqrt(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(1.0),"fix_sqrt1");
+
+}
+
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    a   |        erro                    |
+|--------|--------------------------------|
+*/
+void fix_sqrt_testA(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = 'a';
+	saida=fix_sqrt(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrtA");
+
+}
+
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|   -1   |      		erro	          |
+|--------|--------------------------------|
+*/
+void fix_sqrt_testNEG1(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(-1.0);
+	saida=fix_sqrt(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_sqrt(entrada));
+	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrt-1");
+
+}
+
+/*
+|Entrada      |         Saida Esperada         | 
+|-------------|--------------------------------|
+|22.1807097779|     	 4.70964009006         |
+|-------------|--------------------------------|
+*/
+void fix_sqrt_testMax(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(22.1807097779);
+	saida=fix_sqrt(entrada);
+	/*printf("\nMAX:");
+	fix_print(entrada);
+	printf(" ");
+	printBits(sizeof(entrada),entrada);
+	printf(" ");
+	fix_print(fix_sqrt(entrada));
+	printf("\n");*/
+	hfunit_comp_fixed(saida,fix_val(4.70964009006),"fix_sqrtMAX");
 }
