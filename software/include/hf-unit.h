@@ -49,3 +49,9 @@ int hfunit_comp_vector(void *v1,void *v2, int size, char* message);
 
 // compare floats
 int hfunit_comp_float(float f1,float f2, char *message);
+
+// compare fixed
+//int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage);
+
+
+// compare Matrix

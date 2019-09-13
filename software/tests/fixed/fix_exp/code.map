@@ -1,0 +1,538 @@
+
+Alocando simbolos comuns
+Tamanho comum do arquivo de símbolos
+
+last_free           0x4               fixed.o
+first_free          0x4               fixed.o
+
+Seções de entrada descartadas
+
+ .data          0x0000000000000000        0x0 crt0.o
+ .bss           0x0000000000000000        0x0 crt0.o
+ .text          0x0000000000000000        0x0 fixed.o
+ .data          0x0000000000000000        0x0 fixed.o
+ .bss           0x0000000000000000        0x0 fixed.o
+ .text.xatan    0x0000000000000000      0x26c fixed.o
+ .text.satan    0x0000000000000000       0xe4 fixed.o
+ .text.fix_sqrt.part.1
+                0x0000000000000000      0x16c fixed.o
+ .text.fix_ln.part.2
+                0x0000000000000000      0x344 fixed.o
+ .text.fix_sqrt
+                0x0000000000000000       0x38 fixed.o
+ .text.fix_ln   0x0000000000000000       0x2c fixed.o
+ .text.fix_log  0x0000000000000000       0xbc fixed.o
+ .text.fix_pow  0x0000000000000000       0xb4 fixed.o
+ .text.fix_rad  0x0000000000000000       0xac fixed.o
+ .text.fix_sin  0x0000000000000000      0x238 fixed.o
+ .text.fix_cos  0x0000000000000000       0x20 fixed.o
+ .text.fix_tan  0x0000000000000000       0x88 fixed.o
+ .text.fix_atan
+                0x0000000000000000       0x50 fixed.o
+ .text.fix_atan2
+                0x0000000000000000      0x174 fixed.o
+ .text.fix_asin
+                0x0000000000000000      0x1b0 fixed.o
+ .text.fix_acos
+                0x0000000000000000       0x5c fixed.o
+ .text.fix_sinh
+                0x0000000000000000      0x144 fixed.o
+ .text.fix_cosh
+                0x0000000000000000       0xdc fixed.o
+ .text.fix_tanh
+                0x0000000000000000       0xd8 fixed.o
+ .text.fix_copysign
+                0x0000000000000000       0x44 fixed.o
+ COMMON         0x0000000000000000        0x8 fixed.o
+ .text          0x0000000000000000        0x0 hf-unit.o
+ .data          0x0000000000000000        0x0 hf-unit.o
+ .bss           0x0000000000000000        0x0 hf-unit.o
+ .text.printBits
+                0x0000000000000000       0xa0 hf-unit.o
+ .text.hfunit_comp_vector
+                0x0000000000000000       0xa0 hf-unit.o
+ .text.hfunit_comp_float
+                0x0000000000000000      0x160 hf-unit.o
+ .rodata.hfunit_comp_float.cst4
+                0x0000000000000000        0x4 hf-unit.o
+ .rodata.hfunit_comp_float.str1.4
+                0x0000000000000000        0xc hf-unit.o
+ .rodata.hfunit_comp_vector.str1.4
+                0x0000000000000000       0x2e hf-unit.o
+ .rodata.printBits.str1.4
+                0x0000000000000000        0x7 hf-unit.o
+ .comment       0x0000000000000000       0x12 hf-unit.o
+ .text          0x0000000000000000        0x0 interrupt.o
+ .data          0x0000000000000000        0x0 interrupt.o
+ .bss           0x0000000000000000        0x0 interrupt.o
+ .data.adc_vector
+                0x0000000000000000       0x10 interrupt.o
+ .data.dac_vector
+                0x0000000000000000       0x10 interrupt.o
+ .data.i2c_vector
+                0x0000000000000000       0x10 interrupt.o
+ .data.spi_vector
+                0x0000000000000000       0x10 interrupt.o
+ .data.uart_vector
+                0x0000000000000000       0x40 interrupt.o
+ .text          0x0000000000000000        0x0 libc.o
+ .data          0x0000000000000000        0x0 libc.o
+ .bss           0x0000000000000000        0x0 libc.o
+ .text.itoa.part.1
+                0x0000000000000000       0xdc libc.o
+ .text.delay_ms
+                0x0000000000000000      0x120 libc.o
+ .text.delay_us
+                0x0000000000000000      0x110 libc.o
+ .text.putchar  0x0000000000000000       0x1c libc.o
+ .text.kbhit    0x0000000000000000       0x10 libc.o
+ .text.getchar  0x0000000000000000       0x1c libc.o
+ .text.strcpy   0x0000000000000000       0x1c libc.o
+ .text.strncpy  0x0000000000000000       0x68 libc.o
+ .text.strcat   0x0000000000000000       0x4c libc.o
+ .text.strncat  0x0000000000000000       0x4c libc.o
+ .text.strcmp   0x0000000000000000       0x2c libc.o
+ .text.strncmp  0x0000000000000000       0x3c libc.o
+ .text.strstr   0x0000000000000000       0x68 libc.o
+ .text.strlen   0x0000000000000000       0x30 libc.o
+ .text.strchr   0x0000000000000000       0x24 libc.o
+ .text.strpbrk  0x0000000000000000       0x48 libc.o
+ .text.strsep   0x0000000000000000       0x60 libc.o
+ .text.strtok   0x0000000000000000       0x90 libc.o
+ .text.memcpy   0x0000000000000000       0x24 libc.o
+ .text.memmove  0x0000000000000000       0x4c libc.o
+ .text.memcmp   0x0000000000000000       0x4c libc.o
+ .text.memset   0x0000000000000000       0x20 libc.o
+ .text.strtol   0x0000000000000000      0x110 libc.o
+ .text.atoi     0x0000000000000000       0xcc libc.o
+ .text.atof     0x0000000000000000      0x204 libc.o
+ .text.ftoa     0x0000000000000000      0x164 libc.o
+ .text.itoa     0x0000000000000000       0x50 libc.o
+ .text.puts     0x0000000000000000       0x50 libc.o
+ .text.gets     0x0000000000000000       0x48 libc.o
+ .text.abs      0x0000000000000000       0x10 libc.o
+ .text.random   0x0000000000000000       0x60 libc.o
+ .text.srand    0x0000000000000000        0xc libc.o
+ .text.hexdump  0x0000000000000000      0x1ac libc.o
+ .text.sprintf  0x0000000000000000       0x48 libc.o
+ .text.__udivmodsi4
+                0x0000000000000000       0x78 libc.o
+ .text.__divsi3
+                0x0000000000000000       0x7c libc.o
+ .text.__modsi3
+                0x0000000000000000       0x6c libc.o
+ .text.__ashldi3
+                0x0000000000000000       0x38 libc.o
+ .text.__ashrdi3
+                0x0000000000000000       0x2c libc.o
+ .text.__lshrdi3
+                0x0000000000000000       0x38 libc.o
+ .text.__udivmoddi4
+                0x0000000000000000       0x1c libc.o
+ .text.__umoddi3
+                0x0000000000000000       0x30 libc.o
+ .text.__udivdi3
+                0x0000000000000000       0x20 libc.o
+ .text.__moddi3
+                0x0000000000000000       0x88 libc.o
+ .text.__addsf3
+                0x0000000000000000      0x12c libc.o
+ .text.__subsf3
+                0x0000000000000000       0x28 libc.o
+ .text.__cmpsf2
+                0x0000000000000000       0x44 libc.o
+ .text.__ltsf2  0x0000000000000000       0x38 libc.o
+ .text.__lesf2  0x0000000000000000       0x44 libc.o
+ .text.__gtsf2  0x0000000000000000       0x44 libc.o
+ .text.__gesf2  0x0000000000000000       0x38 libc.o
+ .text.__eqsf2  0x0000000000000000        0xc libc.o
+ .text.__nesf2  0x0000000000000000        0xc libc.o
+ .text.__mulsf3
+                0x0000000000000000      0x140 libc.o
+ .text.__divsf3
+                0x0000000000000000       0xc4 libc.o
+ .text.__negsf2
+                0x0000000000000000       0x18 libc.o
+ .text.__fixsfsi
+                0x0000000000000000       0x48 libc.o
+ .text.__fixunssfsi
+                0x0000000000000000       0x48 libc.o
+ .text.__floatsisf
+                0x0000000000000000       0x90 libc.o
+ .text.__floatunsisf
+                0x0000000000000000       0x8c libc.o
+ .text.__floatsidf
+                0x0000000000000000       0x8c libc.o
+ .text.__floatdidf
+                0x0000000000000000       0xc0 libc.o
+ .text.__negdf2
+                0x0000000000000000       0x28 libc.o
+ .text.__extendsfdf2
+                0x0000000000000000       0x48 libc.o
+ .text.__truncdfsf2
+                0x0000000000000000       0xc4 libc.o
+ .text.__cmpdf2
+                0x0000000000000000       0x4c libc.o
+ .text.__fixdfsi
+                0x0000000000000000       0x6c libc.o
+ .text.__fixdfdi
+                0x0000000000000000       0xa8 libc.o
+ .text.__fixunsdfsi
+                0x0000000000000000       0x5c libc.o
+ .text.__fixunsdfdi
+                0x0000000000000000       0x74 libc.o
+ .text.__adddf3
+                0x0000000000000000      0x248 libc.o
+ .text.__subdf3
+                0x0000000000000000       0x40 libc.o
+ .text.__muldf3
+                0x0000000000000000      0x20c libc.o
+ .text.__divdf3
+                0x0000000000000000      0x174 libc.o
+ .text.__gtdf2  0x0000000000000000       0x88 libc.o
+ .text.__gedf2  0x0000000000000000       0x88 libc.o
+ .text.__ltdf2  0x0000000000000000       0x88 libc.o
+ .text.__ledf2  0x0000000000000000        0x8 libc.o
+ .text.__eqdf2  0x0000000000000000       0x14 libc.o
+ .text.__nedf2  0x0000000000000000       0x14 libc.o
+ .text.print_float
+                0x0000000000000000       0x38 libc.o
+ .text.print_double
+                0x0000000000000000       0x40 libc.o
+ .text.f_copysign
+                0x0000000000000000       0x7c libc.o
+ .text.d_copysign
+                0x0000000000000000       0xb4 libc.o
+ .rodata.__divdf3.cst8
+                0x0000000000000000        0x8 libc.o
+ .rodata.__divsf3.cst4
+                0x0000000000000000        0x8 libc.o
+ .rodata.atof.cst4
+                0x0000000000000000        0xc libc.o
+ .rodata.hexdump.str1.4
+                0x0000000000000000       0x13 libc.o
+ .rodata.itoa.part.1.str1.4
+                0x0000000000000000       0x48 libc.o
+ .rodata.print_float.str1.4
+                0x0000000000000000        0x5 libc.o
+ .sbss.last.1262
+                0x0000000000000000        0x4 libc.o
+ .sdata.rand1   0x0000000000000000        0x4 libc.o
+ .text          0x0000000000000000        0x0 malloc.o
+ .data          0x0000000000000000        0x0 malloc.o
+ .bss           0x0000000000000000        0x0 malloc.o
+ .text.free     0x0000000000000000       0x20 malloc.o
+ .text.malloc   0x0000000000000000       0xb4 malloc.o
+ .text.heap_init
+                0x0000000000000000       0x38 malloc.o
+ .comment       0x0000000000000000       0x12 malloc.o
+ .text          0x0000000000000000        0x0 math.o
+ .data          0x0000000000000000        0x0 math.o
+ .bss           0x0000000000000000        0x0 math.o
+ .text.xatan    0x0000000000000000      0x15c math.o
+ .text.satan    0x0000000000000000      0x114 math.o
+ .text.frexp.part.1
+                0x0000000000000000       0x34 math.o
+ .text.fabs     0x0000000000000000       0x3c math.o
+ .text.frexp    0x0000000000000000       0x64 math.o
+ .text.ldexp    0x0000000000000000      0x1b0 math.o
+ .text.modf     0x0000000000000000       0xbc math.o
+ .text.sinus    0x0000000000000000      0x274 math.o
+ .text.floor    0x0000000000000000       0xa8 math.o
+ .text.exp.part.2
+                0x0000000000000000      0x180 math.o
+ .text.ceil     0x0000000000000000       0x30 math.o
+ .text.sqrt     0x0000000000000000      0x228 math.o
+ .text.exp      0x0000000000000000       0xac math.o
+ .text.log      0x0000000000000000      0x264 math.o
+ .text.log10    0x0000000000000000       0x2c math.o
+ .text.pow      0x0000000000000000      0x1e8 math.o
+ .text.cos      0x0000000000000000       0x44 math.o
+ .text.sin      0x0000000000000000        0xc math.o
+ .text.tan      0x0000000000000000      0x2c8 math.o
+ .text.atan     0x0000000000000000       0x68 math.o
+ .text.atan2    0x0000000000000000      0x190 math.o
+ .text.asin     0x0000000000000000      0x158 math.o
+ .text.acos     0x0000000000000000       0x7c math.o
+ .text.sinh     0x0000000000000000      0x338 math.o
+ .text.cosh     0x0000000000000000      0x234 math.o
+ .text.tanh     0x0000000000000000       0xac math.o
+ .rodata.asin.cst4
+                0x0000000000000000        0x4 math.o
+ .rodata.atan2.cst4
+                0x0000000000000000        0x8 math.o
+ .rodata.exp.cst4
+                0x0000000000000000        0xc math.o
+ .rodata.exp.part.2.cst4
+                0x0000000000000000       0x24 math.o
+ .rodata.ldexp.cst4
+                0x0000000000000000        0x4 math.o
+ .rodata.log.cst4
+                0x0000000000000000       0x28 math.o
+ .rodata.log10.cst4
+                0x0000000000000000        0x4 math.o
+ .rodata.satan.cst4
+                0x0000000000000000       0x14 math.o
+ .rodata.sinh.cst4
+                0x0000000000000000       0x20 math.o
+ .rodata.sinus.cst4
+                0x0000000000000000       0x34 math.o
+ .rodata.sqrt.cst4
+                0x0000000000000000        0x8 math.o
+ .rodata.tan.cst4
+                0x0000000000000000       0x1c math.o
+ .rodata.tan.cst8
+                0x0000000000000000       0x18 math.o
+ .rodata.xatan.cst4
+                0x0000000000000000       0x24 math.o
+ .comment       0x0000000000000000       0x12 math.o
+ .text          0x0000000000000000        0x0 test.o
+ .data          0x0000000000000000        0x0 test.o
+ .bss           0x0000000000000000        0x0 test.o
+ .text          0x0000000000000000        0x0 tester.o
+ .data          0x0000000000000000        0x0 tester.o
+ .bss           0x0000000000000000        0x0 tester.o
+
+Configuração de Memória
+
+Nome             Origem             Tamanho            Atributos
+rom              0x0000000000000000 0x0000000010000000
+ram              0x0000000040000000 0x0000000010000000
+ram_top          0x000000004ffffc00 0x0000000000000400
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Script do link-editor e mapa de memória
+
+                0x000000004ffffffc                _stack = 0x4ffffffc
+                0x0000000000000000                . = 0x0
+
+.text           0x0000000040000000     0x1538
+ *(.text.init)
+                0x0000000040000000                _text = .
+ *(.text)
+ .text          0x0000000040000000      0x288 crt0.o
+                0x0000000040000000                _entry
+                0x0000000040000100                _isr
+                0x00000000400001ec                _interrupt_set
+                0x0000000040000204                setjmp
+                0x0000000040000240                longjmp
+                0x000000004000027c                syscall
+ *(.text.*)
+ .text.fixtoa   0x0000000040000288      0x16c fixed.o
+                0x0000000040000288                fixtoa
+ .text.fix_exp  0x00000000400003f4      0x27c fixed.o
+                0x00000000400003f4                fix_exp
+ .text.fix_print
+                0x0000000040000670       0x30 fixed.o
+                0x0000000040000670                fix_print
+ .text.dummy_handler
+                0x00000000400006a0        0xc interrupt.o
+                0x00000000400006a0                timer0a_handler
+                0x00000000400006a0                irq4_handler
+                0x00000000400006a0                spi0_handler
+                0x00000000400006a0                uart7tx_handler
+                0x00000000400006a0                uart6tx_handler
+                0x00000000400006a0                irq2_handler
+                0x00000000400006a0                adc2_handler
+                0x00000000400006a0                timer4ocr_handler
+                0x00000000400006a0                irq7_handler
+                0x00000000400006a0                timer3ocr_handler
+                0x00000000400006a0                timer7ctc_handler
+                0x00000000400006a0                uart7rx_handler
+                0x00000000400006a0                uart4tx_handler
+                0x00000000400006a0                uart2rx_handler
+                0x00000000400006a0                porta_handler
+                0x00000000400006a0                uart3rx_handler
+                0x00000000400006a0                portd_handler
+                0x00000000400006a0                uart2tx_handler
+                0x00000000400006a0                uart3tx_handler
+                0x00000000400006a0                portc_handler
+                0x00000000400006a0                uart0rx_handler
+                0x00000000400006a0                dummy_handler
+                0x00000000400006a0                irq3_handler
+                0x00000000400006a0                adc3_handler
+                0x00000000400006a0                timer6ctc_handler
+                0x00000000400006a0                irq1_handler
+                0x00000000400006a0                adc1_handler
+                0x00000000400006a0                i2c1_handler
+                0x00000000400006a0                spi2_handler
+                0x00000000400006a0                irq6_handler
+                0x00000000400006a0                timer4ctc_handler
+                0x00000000400006a0                dac2_handler
+                0x00000000400006a0                timer5ctc_handler
+                0x00000000400006a0                uart0tx_handler
+                0x00000000400006a0                portb_handler
+                0x00000000400006a0                dac0_handler
+                0x00000000400006a0                uart5tx_handler
+                0x00000000400006a0                timer0b_handler
+                0x00000000400006a0                spi1_handler
+                0x00000000400006a0                uart1tx_handler
+                0x00000000400006a0                i2c0_handler
+                0x00000000400006a0                spi3_handler
+                0x00000000400006a0                dac1_handler
+                0x00000000400006a0                uart1rx_handler
+                0x00000000400006a0                timer6ocr_handler
+                0x00000000400006a0                uart6rx_handler
+                0x00000000400006a0                uart5rx_handler
+                0x00000000400006a0                timer2ocr_handler
+                0x00000000400006a0                timer2ctc_handler
+                0x00000000400006a0                timer7ocr_handler
+                0x00000000400006a0                timer5ocr_handler
+                0x00000000400006a0                adc0_handler
+                0x00000000400006a0                timer3ctc_handler
+                0x00000000400006a0                timer1ctc_handler
+                0x00000000400006a0                i2c2_handler
+                0x00000000400006a0                dac3_handler
+                0x00000000400006a0                i2c3_handler
+                0x00000000400006a0                timer1ocr_handler
+                0x00000000400006a0                uart4rx_handler
+                0x00000000400006a0                irq5_handler
+ .text.irq0_handler
+                0x00000000400006ac      0x240 interrupt.o
+                0x00000000400006ac                irq0_handler
+ .text.irq_enable
+                0x00000000400008ec       0x34 interrupt.o
+                0x00000000400008ec                irq_enable
+ .text.irq_handler
+                0x0000000040000920       0x50 interrupt.o
+                0x0000000040000920                irq_handler
+ .text.exception_handler
+                0x0000000040000970       0x34 interrupt.o
+                0x0000000040000970                exception_handler
+ .text.printchar.part.0
+                0x00000000400009a4       0x1c libc.o
+ .text.vsprintf
+                0x00000000400009c0      0x3e4 libc.o
+ .text.__udivmoddi4.part.2
+                0x0000000040000da4      0x13c libc.o
+ .text.printf   0x0000000040000ee0       0x48 libc.o
+                0x0000000040000ee0                printf
+ .text.__mulsi3
+                0x0000000040000f28       0x30 libc.o
+                0x0000000040000f28                __mulsi3
+ .text.__muldsi3
+                0x0000000040000f58       0xd4 libc.o
+                0x0000000040000f58                __muldsi3
+ .text.__muldi3
+                0x000000004000102c       0xa8 libc.o
+                0x000000004000102c                __muldi3
+ .text.__udivsi3
+                0x00000000400010d4       0x68 libc.o
+                0x00000000400010d4                __udivsi3
+ .text.__umodsi3
+                0x000000004000113c       0x54 libc.o
+                0x000000004000113c                __umodsi3
+ .text.__divdi3
+                0x0000000040001190       0x94 libc.o
+                0x0000000040001190                __divdi3
+ .text.hfunit_comp_fixed
+                0x0000000040001224      0x104 test.o
+                0x0000000040001224                hfunit_comp_fixed
+ .text.fix_exp_test
+                0x0000000040001328      0x168 test.o
+                0x0000000040001328                fix_exp_test
+ .text.hfunit_run_tests
+                0x0000000040001490        0x4 test.o
+                0x0000000040001490                hfunit_run_tests
+ .text.main_test
+                0x0000000040001494       0xa4 tester.o
+                0x0000000040001494                main_test
+                0x0000000040001538                _etext = .
+
+.rela.dyn       0x0000000040001538        0x0
+ .rela.text     0x0000000040001538        0x0 crt0.o
+ .rela.data.gpio_vector
+                0x0000000040001538        0x0 crt0.o
+ .rela.data.irq_vector
+                0x0000000040001538        0x0 crt0.o
+ .rela.data.timer_vector
+                0x0000000040001538        0x0 crt0.o
+
+.data           0x0000000040001538      0x2b8
+                0x0000000040001538                _rodata = .
+ *(.rdata)
+ *(.rodata)
+ *(.rodata.*)
+ .rodata.fix_print.str1.4
+                0x0000000040001538        0x5 fixed.o
+ *fill*         0x000000004000153d        0x3 
+ .rodata.irq0_handler
+                0x0000000040001540       0x84 interrupt.o
+ .rodata.dummy_handler.str1.4
+                0x00000000400015c4        0x5 interrupt.o
+ *fill*         0x00000000400015c9        0x3 
+ .rodata.exception_handler.str1.4
+                0x00000000400015cc       0x2c interrupt.o
+ .rodata.irq0_handler.str1.4
+                0x00000000400015f8       0x25 interrupt.o
+ *fill*         0x000000004000161d        0x3 
+ .rodata.vsprintf
+                0x0000000040001620       0x84 libc.o
+ .rodata.vsprintf.str1.4
+                0x00000000400016a4       0x19 libc.o
+ *fill*         0x00000000400016bd        0x3 
+ .rodata.fix_exp_test.str1.4
+                0x00000000400016c0       0x22 test.o
+ *fill*         0x00000000400016e2        0x2 
+ .rodata.hfunit_comp_fixed.str1.4
+                0x00000000400016e4       0x32 test.o
+                                         0x36 (tamanho de relaxar)
+ *fill*         0x0000000040001716        0x2 
+ .rodata.main_test.str1.4
+                0x0000000040001718       0x68 tester.o
+                0x0000000040001780                _erodata = .
+                0x0000000040001780                _data = .
+ *(.data)
+ *(.data.*)
+ .data.gpio_vector
+                0x0000000040001780       0x10 interrupt.o
+                0x0000000040001780                gpio_vector
+ .data.irq_vector
+                0x0000000040001790       0x20 interrupt.o
+                0x0000000040001790                irq_vector
+ .data.timer_vector
+                0x00000000400017b0       0x40 interrupt.o
+                0x00000000400017b0                timer_vector
+                0x0000000040001ff0                _gp = (. + 0x800)
+ *(.sdata)
+ *(.sdata.*)
+                0x00000000400017f0                . = ALIGN (0x10)
+ *fill*         0x00000000400017f0        0x0 
+                0x00000000400017f0                _edata = .
+
+.bss            0x00000000400017f0        0xc
+                0x00000000400017f0                _bss_start = .
+ *(.sbss)
+ *(.sbss.*)
+ .sbss.executed_tests
+                0x00000000400017f0        0x4 tester.o
+                0x00000000400017f0                executed_tests
+ .sbss.failed_tests
+                0x00000000400017f4        0x4 tester.o
+                0x00000000400017f4                failed_tests
+ .sbss.test_counter
+                0x00000000400017f8        0x4 tester.o
+                0x00000000400017f8                test_counter
+ *(.bss)
+ *(.bss.*)
+                0x00000000400017fc                . = ALIGN (0x4)
+                0x00000000400017fc                _bss_end = .
+                0x00000000400017fc                _end = .
+LOAD crt0.o
+LOAD fixed.o
+LOAD hf-unit.o
+LOAD interrupt.o
+LOAD libc.o
+LOAD malloc.o
+LOAD math.o
+LOAD test.o
+LOAD tester.o
+OUTPUT(test.elf elf32-littleriscv)
+
+.comment        0x0000000000000000       0x11
+ .comment       0x0000000000000000       0x11 fixed.o
+                                         0x12 (tamanho de relaxar)
+ .comment       0x0000000000000011       0x12 interrupt.o
+ .comment       0x0000000000000011       0x12 libc.o
+ .comment       0x0000000000000011       0x12 test.o
+ .comment       0x0000000000000011       0x12 tester.o

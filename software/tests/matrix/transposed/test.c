@@ -42,6 +42,17 @@ void hfunit_run_tests(){
 // place here a nice description for each test
 // eu peguei um exemplao só p vcs verem como usar as funcoes
 // mas vcs vao ter q separar bem os teste. nao pode fazer assim !!!
+/*
+|Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
+|--------|--------------------------------|-----------------------------------|
+|        |                                |                                   |
+|--------|--------------------------------|-----------------------------------|
+|        |                                |                                   |
+|--------|--------------------------------|-----------------------------------|
+|        |                                |                                   |
+|--------|--------------------------------|-----------------------------------|
+
+*/
 void super_mat_test() {
 
 struct Matrix M1, M2, M3, M4, M5, M6, M7;

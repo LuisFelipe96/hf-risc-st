@@ -28,6 +28,19 @@ void hfunit_run_tests(){
 }
 
 // place here a nice description for each test
+/*
+|Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
+|--------|--------------------------------|-----------------------------------|
+|        |                                |                                   |
+|--------|--------------------------------|-----------------------------------|
+|        |                                |                                   |
+|--------|--------------------------------|-----------------------------------|
+|        |                                |                                   |
+|--------|--------------------------------|-----------------------------------|
+
+
+
+*/
 void strcat_test1(){
 	char orig[20] = "A";
 	char dest[20] = "B";
@@ -36,6 +49,12 @@ void strcat_test1(){
 	//printf("%s",dest);
 	hfunit_comp_vector(dest,expected,sizeof(char)*20, "strcat - Classe 1");
 }
+
+/*
+
+
+
+*/
 void strcat_test2(){
 	char orig[6] = "CD";
 	char dest[6] = "EF";
@@ -45,6 +64,11 @@ void strcat_test2(){
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 2");
 }
 
+/*
+
+
+
+*/
 void strcat_test3(){
 	char orig[6] = "";
 	char dest[6] = "G";
@@ -55,6 +79,11 @@ void strcat_test3(){
 
 }
 
+/*
+
+
+
+*/
 void strcat_test4(){
 	char orig[6] = "H";
 	char dest[6] = "";
@@ -64,6 +93,11 @@ void strcat_test4(){
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 4");
 }
 
+/*
+
+
+
+*/
 void strcat_test5(){
 	char orig[6] = "";
 	char dest[6] = "";
@@ -73,6 +107,11 @@ void strcat_test5(){
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 5");
 }
 
+/*
+
+
+
+*/
 void strcat_test6(){
 	char orig[6] = "\0";
 	char dest[6] = "\0";
@@ -82,6 +121,11 @@ void strcat_test6(){
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 6");
 }
 
+/*
+
+
+
+*/
 void strcat_test7(){
 	char orig[6] = "@";
 	char dest[6] = "&";
@@ -91,6 +135,11 @@ void strcat_test7(){
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 7");
 }
 
+/*
+
+
+
+*/
 void strcat_test8(){
 	char orig[6] = "IJK";
 	char dest[6] = "LMN";
@@ -100,6 +149,11 @@ void strcat_test8(){
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 8");
 }
 
+/*
+
+
+
+*/
 void strcat_test9(){
 	char orig[6] = "OPQR";
 	char dest[6] = "STU";
