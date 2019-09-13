@@ -5,27 +5,21 @@
 void *memcpy(void *dst, const void *src, uint32_t n);
 
 // list of individual tests
-void memcpy_test1();
-void memcpy_test2();
-void memcpy_test3();
-void memcpy_test4();
-void memcpy_test5();
-void memcpy_test6();
-void memcpy_test7();
-void memcpy_test8();
-void memcpy_test9();
+void memcpy_tamanho_test1();
+void memcpy_tamanho_test2();
+void memcpy_origem_test1();
+void memcpy_origem_test2();
+void memcpy_origem_test3();
+void memcpy_origem_test4();
 
 // main test
 void hfunit_run_tests(){
-	memcpy_test1();
-	memcpy_test2();
-	memcpy_test3();
-	memcpy_test4();
-	memcpy_test5();
-	memcpy_test6();
-	memcpy_test7();
-	memcpy_test8();
-	memcpy_test9();
+	memcpy_tamanho_test1();
+	memcpy_tamanho_test2();
+	memcpy_origem_test1();
+	memcpy_origem_test2();
+	memcpy_origem_test3();
+	memcpy_origem_test4();
 }
 /*	
 ==== CLASSES DE EQUIVALÊNCIA ====
@@ -38,7 +32,6 @@ void hfunit_run_tests(){
 |			  |--------------------------------|-----------------------------------|
 |			  |		números inteiros		   | 	     nḿeros não inteiros       |
 |-------------|--------------------------------|-----------------------------------|
-
 */
 /*	
 ==== VALORES LIMITES ====
@@ -47,87 +40,103 @@ tamanho:	0; 1
 
 /*
 Entrada: 
-	- origem:
-	- tamanho: 
-Resultado esperado: 
+	- origem: A
+	- tamanho: 1	=> valor limite
+Resultado esperado: A 
 */
-void memcpy_test1(){
-	char orig[6] = "A";
-	char dest[6];
-	char expected[6] = "A";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 1");
-}
-void memcpy_test2(){
-	char orig[6] = "CD";
-	char dest[6];
-	char expected[6] = "CD";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 2");
+void memcpy_tamanho_test1(){
+	char orig[1] = "A";
+	char dest[1];
+	char expected[1] = "A";
+	int tamanho = sizeof(char);
+	memcpy(dest,orig,tamanho);
+	//printf("expected: %s\n",expected);
+	//printf("dest: %s\n",dest);
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - tamanho = 1");
 }
 
-void memcpy_test3(){
-	char orig[6] = "ghb";
-	char dest[6];
-	char expected[6] = "ghb";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 3");
-
+/*
+Entrada: 
+	- origem: A
+	- tamanho: 0	=> valor limite
+Resultado esperado: 'null'
+*/
+void memcpy_tamanho_test2(){
+	char orig = "A";
+	char dest;
+	char expected = NULL;
+	int tamanho = 0;
+	memcpy(dest,orig,tamanho);
+	//printf("expected: %s\n",expected);
+	//printf("dest: %s\n",dest);
+	hfunit_comp_vector(dest,expected,1, "memcpy - tamanho = 0");
 }
 
-void memcpy_test4(){
-	char orig[6] = "H";
-	char dest[6] = "";
-	char expected[6] = "H";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 4");
+/*
+Entrada: 
+	- origem: '\0'
+	- tamanho: 1
+Resultado esperado: '\0'
+*/
+void memcpy_origem_test1(){
+	char orig[1] = "\0";
+	char dest[1];
+	char expected[1] = "\0";
+	int tamanho = sizeof(char);
+	memcpy(dest,orig,tamanho);
+	//printf("expected: %s\n",expected);
+	//printf("dest: %s\n",dest);
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = barra 0");
 }
 
-void memcpy_test5(){
-	char orig[6] = "";
-	char dest[6];
-	char expected[6] = "";
-	memcpy(dest,orig,sizeof(char)*6);	
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 5");
+/*
+Entrada: 
+	- origem: ghb
+	- tamanho: 3
+Resultado esperado: ghb
+*/
+void memcpy_origem_test2(){
+	char orig[3] = "ghb";
+	char dest[3];
+	char expected[3] = "ghb";
+	int tamanho = sizeof(char)*3;
+	memcpy(dest,orig,tamanho);
+	//printf("expected: %s\n",expected);
+	//printf("dest: %s\n",dest);
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = ghb");
 }
 
-void memcpy_test6(){
-	char orig[6] = "\0";
-	char dest[6];
-	char expected[6] = "";
-	memcpy(dest,orig,sizeof(char)*6);	
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 6");
+/*
+Entrada: 
+	- origem: @
+	- tamanho: 1
+Resultado esperado: @
+*/
+void memcpy_origem_test3(){
+	char orig[1] = "@";
+	char dest[1];
+	char expected[1] = "@";
+	int tamanho = sizeof(char);
+	memcpy(dest,orig,tamanho);
+	//printf("expected: %s\n",expected);
+	//printf("dest: %s\n",dest);
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = @");
 }
 
-void memcpy_test7(){
-	char orig[6] = "@";
+/*
+Entrada: 
+	- origem: 1234567	|	string maior que o tamanho 
+	- tamanho: 7		|	especificado
+	- tamanho dest: 6	|
+Resultado esperado: 1234567
+*/
+void memcpy_origem_test4(){
+	char orig[7] = "1234567";
 	char dest[6];
-	char expected[6] = "@";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 7");
-}
-
-void memcpy_test8(){
-	char orig[6] = "IJK";
-	char dest[6];
-	char expected[6] = "IJK";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 8");
-}
-
-void memcpy_test9(){
-	char orig[6] = "OPQRSTU";
-	char dest[6];
-	char expected[7] = "OPQRSTU";
-	memcpy(dest,orig,sizeof(char)*6);
-	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 9");
+	char expected[7] = "1234567";
+	int tamanho = sizeof(char)*7;
+	memcpy(dest,orig,tamanho);
+	//printf("expected: %s\n",expected);
+	//printf("dest: %s\n",dest);
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = 1234567");
 }
