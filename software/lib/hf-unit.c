@@ -56,12 +56,12 @@ int hfunit_comp_float(float f1,float f2, char *message){
 
 	float a = f1 -f2 - precision;
 	float b = f1 -f2 + precision;
-	printf("a: ");
+	/*printf("a: ");
 	print_float(a);
 	printf("\n");
 	printf("b: ");
 	print_float(b);
-	printf("\n");
+	printf("\n");*/
 	if (!(((f1 -f2 - precision) < 0.0f) && ((f1 -f2 + precision) > 0.0f)))
 	{
 		failed_tests++;
