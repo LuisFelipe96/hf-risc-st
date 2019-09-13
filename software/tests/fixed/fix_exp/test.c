@@ -8,7 +8,6 @@ typedef fixed_t typ_var;
 fixed_t fix_exp(fixed_t arg);
 
 // list of individual tests
-int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage);
 void fix_exp_test();
 
 // main test
@@ -22,6 +21,7 @@ void hfunit_run_tests(){
 	fix_exp_testMax();
 	fix_exp_testMin();
 }
+
 
 /*int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
 	test_counter++;
@@ -48,6 +48,7 @@ void hfunit_run_tests(){
 
 }*/
 // place here a nice description for each test
+
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
