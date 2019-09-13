@@ -23,7 +23,7 @@ void hfunit_run_tests(){
 	fix_exp_testMin();
 }
 
-int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
+/*int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
 	test_counter++;
 	fixed_t precision = fix_val(0.1);
 //	if (!(((f1 - precision) < f2) && ((f1 + precision) > f2)))
@@ -46,7 +46,7 @@ int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
 
 
 
-}
+}*/
 // place here a nice description for each test
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
