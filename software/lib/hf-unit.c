@@ -5,7 +5,8 @@
   See usage examples in the dir software/tests
 */
 #include<hf-unit.h>
-
+#include <fixed.h>
+#include <mat_type.h> 
 
 // =======================
 // util functions
@@ -71,23 +72,27 @@ int hfunit_comp_float(float f1,float f2, char *message){
 	}
 }
 
-
 //compare fixed
-
-/*int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
+int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *message){
 	test_counter++;
-	fixed_t precision = fix_val(0.00001);
-//	if (!(((f1 - precision) < f2) && ((f1 + precision) > f2)))
-	if (!(((f1 -f2 - precision) < fix_val(0.0f)) && ((f1 -f2 + precision) > fix_val(0.0f))))
+	fixed_t precision = fix_val(0.1);
+
+	fix_print(f1);
+	printf(" = ");
+	fix_print(f2);
+	printf("\n");
+	if ((f2-f1 >= fix_val(0.0)-precision) && (f2-f1 <= fix_val(0.0)+precision))
 	{
+		HFUNIT_MSG_PASS(message)
+		return 0;
+	}else{
+		
 		failed_tests++;
 		HFUNIT_MSG_FAIL(message)
 		return 1;
-	}else{
-		HFUNIT_MSG_PASS(message)
-		return 0;
 	}
 
 
 
-}*/
+}
+
