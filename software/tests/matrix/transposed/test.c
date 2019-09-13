@@ -10,8 +10,6 @@ just change the variable MATRIX_TYPE in the makefile
 
 
 // list of individual tests
-//void sqrt1_test();
-//void sqrt4_test();
 void super_mat_test();
 void mat_test_0();
 void mat_test_1();
@@ -57,10 +55,6 @@ void hfunit_run_tests(){
 }
 
 
-
-// place here a nice description for each test
-// eu peguei um exemplao só p vcs verem como usar as funcoes
-// mas vcs vao ter q separar bem os teste. nao pode fazer assim !!!
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
@@ -328,69 +322,3 @@ void mat_test_Empy(){
 	print_matrix(M2);/**/
 	mat_compare(&M4,&M2,4,4,"Test - Mat empy");
 }
-/*
-|Entrada                                                        |                         Saida Esperada                    | 
-|---------------------------------------------------------------|-----------------------------------------------------------|
-|  1.000000000    2.000000000    3.000000000    4.000000000     | 1.000000000    0.000000000    0.000000000    0.000000000  |
-|  0.000000000    1.000000000    5.000000000    6.000000000     | 2.000000000    1.000000000    0.000000000    0.000000000  |
-|  0.000000000    0.000000000    1.000000000    7.000000000     | 3.000000000    5.000000000    1.000000000    0.000000000  |
-|  0.000000000    0.000000000    0.000000000    1.000000000     | 4.000000000    6.000000000    7.000000000    1.000000000  |
-|---------------------------------------------------------------|-----------------------------------------------------------|
-
-
-*/
-/*void mat_test_MAX() {
-
-	struct Matrix M1, M2, M3, M4, M5, M6, M7;
-	typ_var Multiplicator = val(5);
-
-	typ_var val1[16] = {val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F),val(3.402823466e+38F)};
-	typ_var val2[16] = {val(1),val(0),val(0),val(0),val(2),val(1),val(0),val(0),val(3),val(5),val(1),val(0),val(4),val(6),val(7),val(1)};
-
-	M1 = set_values(4, 4, val1);
-	M2 = set_values(4, 4, val2);
-
-	//----------------------------FUNCTIONS TESTS-----------------------------------
-
-	printf("Matrix 1 is:\n");
-	print_matrix(M1);
-	printf("Transposed of Matrix 1 is:\n");/**/
-/*	M4 = transposed(M1);
-	print_matrix(M4);
-	printf("Expected is:\n");
-	print_matrix(M2);/**/
-/*	mat_compare(&M4,&M2,4,4, "Test - Mat - MAX");
-}
-/*
-|Entrada                                                        |                         Saida Esperada                    | 
-|---------------------------------------------------------------|-----------------------------------------------------------|
-|  1.000000000    2.000000000    3.000000000    4.000000000     | 1.000000000    0.000000000    0.000000000    0.000000000  |
-|  0.000000000    1.000000000    5.000000000    6.000000000     | 2.000000000    1.000000000    0.000000000    0.000000000  |
-|  0.000000000    0.000000000    1.000000000    7.000000000     | 3.000000000    5.000000000    1.000000000    0.000000000  |
-|  0.000000000    0.000000000    0.000000000    1.000000000     | 4.000000000    6.000000000    7.000000000    1.000000000  |
-|---------------------------------------------------------------|-----------------------------------------------------------|
-
-
-*/
-/*void mat_test_MIN() {
-
-	struct Matrix M1, M2, M3, M4, M5, M6, M7;
-	typ_var Multiplicator = val(5);
-
-	typ_var val1[16] = {val(1),val(2),val(3),val(4),val(0),val(1),val(5),val(6),val(0),val(0),val(1),val(7),val(0),val(0),val(0),val(1)};
-	typ_var val2[16] = {val(1),val(0),val(0),val(0),val(2),val(1),val(0),val(0),val(3),val(5),val(1),val(0),val(4),val(6),val(7),val(1)};
-
-	M1 = set_values(4, 4, val1);
-	M2 = set_values(4, 4, val2);
-
-	//----------------------------FUNCTIONS TESTS-----------------------------------
-
-	printf("Matrix 1 is:\n");
-	print_matrix(M1);
-	printf("Transposed of Matrix 1 is:\n");/**/
-/*	M4 = transposed(M1);
-	print_matrix(M4);
-	printf("Expected is:\n");
-	print_matrix(M2);/**/
-/*	mat_compare(&M4,&M2,4,4, "Test - Mat - Diag Sup");
-}*/
