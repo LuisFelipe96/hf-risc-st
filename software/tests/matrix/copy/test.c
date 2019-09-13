@@ -10,8 +10,6 @@ just change the variable MATRIX_TYPE in the makefile
 
 
 // list of individual tests
-//void sqrt1_test();
-//void sqrt4_test();
 void super_mat_test();
 void mat_test_0();
 void mat_test_1();
@@ -52,9 +50,6 @@ void hfunit_run_tests(){
 
 
 
-// place here a nice description for each test
-// eu peguei um exemplao só p vcs verem como usar as funcoes
-// mas vcs vao ter q separar bem os teste. nao pode fazer assim !!!
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
