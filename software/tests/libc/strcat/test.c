@@ -31,7 +31,7 @@ void hfunit_run_tests(){
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
-|        |                                |                                   |
+| A | B  |                                |                                   |
 |--------|--------------------------------|-----------------------------------|
 |        |                                |                                   |
 |--------|--------------------------------|-----------------------------------|
@@ -157,10 +157,10 @@ void strcat_test8(){
 void strcat_test9(){
 	char orig[6] = "OPQR";
 	char dest[6] = "STU";
-	char expected[7] = "STUOPQR";
+	char expected[6] = "STUOPQR";
 	strcat(dest,orig);
 	//printf("%s",dest);
-	hfunit_comp_vector(dest,expected,sizeof(char)*6, "strcat - Classe 9");
+	hfunit_comp_vector(dest,expected,sizeof(char)*7, "strcat - Classe 9");
 }
 // place here a nice description for each test
 /*void sqrt4_test(){

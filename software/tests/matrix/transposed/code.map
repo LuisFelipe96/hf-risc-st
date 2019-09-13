@@ -309,6 +309,10 @@ Seções de entrada descartadas
  .text          0x0000000000000000        0x0 test.o
  .data          0x0000000000000000        0x0 test.o
  .bss           0x0000000000000000        0x0 test.o
+ .text.mat_test
+                0x0000000000000000      0x544 test.o
+ .rodata.mat_test.str1.4
+                0x0000000000000000       0x41 test.o
  .text          0x0000000000000000        0x0 tester.o
  .data          0x0000000000000000        0x0 tester.o
  .bss           0x0000000000000000        0x0 tester.o
@@ -326,7 +330,7 @@ Script do link-editor e mapa de memória
                 0x000000004ffffffc                _stack = 0x4ffffffc
                 0x0000000000000000                . = 0x0
 
-.text           0x0000000040000000     0x1a2c
+.text           0x0000000040000000     0x2278
  *(.text.init)
                 0x0000000040000000                _text = .
  *(.text)
@@ -460,110 +464,127 @@ Script do link-editor e mapa de memória
                 0x0000000040001274      0x108 matrix.o
                 0x0000000040001274                transposed
  .text.mat_compare
-                0x000000004000137c       0xf4 test.o
+                0x000000004000137c       0xec test.o
                 0x000000004000137c                mat_compare
- .text.super_mat_test
-                0x0000000040001470      0x514 test.o
-                0x0000000040001470                super_mat_test
+ .text.mat_test_0
+                0x0000000040001468      0x314 test.o
+                0x0000000040001468                mat_test_0
+ .text.mat_test_1
+                0x000000004000177c      0x3cc test.o
+                0x000000004000177c                mat_test_1
+ .text.mat_test_Ind
+                0x0000000040001b48      0x338 test.o
+                0x0000000040001b48                mat_test_Ind
+ .text.mat_test_randon
+                0x0000000040001e80      0x334 test.o
+                0x0000000040001e80                mat_test_randon
  .text.hfunit_run_tests
-                0x0000000040001984        0x4 test.o
-                0x0000000040001984                hfunit_run_tests
+                0x00000000400021b4       0x20 test.o
+                0x00000000400021b4                hfunit_run_tests
  .text.main_test
-                0x0000000040001988       0xa4 tester.o
-                0x0000000040001988                main_test
-                0x0000000040001a2c                _etext = .
+                0x00000000400021d4       0xa4 tester.o
+                0x00000000400021d4                main_test
+                0x0000000040002278                _etext = .
 
-.rela.dyn       0x0000000040001a2c        0x0
- .rela.text     0x0000000040001a2c        0x0 crt0.o
+.rela.dyn       0x0000000040002278        0x0
+ .rela.text     0x0000000040002278        0x0 crt0.o
  .rela.data.gpio_vector
-                0x0000000040001a2c        0x0 crt0.o
+                0x0000000040002278        0x0 crt0.o
  .rela.data.irq_vector
-                0x0000000040001a2c        0x0 crt0.o
+                0x0000000040002278        0x0 crt0.o
  .rela.data.timer_vector
-                0x0000000040001a2c        0x0 crt0.o
+                0x0000000040002278        0x0 crt0.o
 
-.data           0x0000000040001a2c      0x3b4
-                0x0000000040001a2c                _rodata = .
+.data           0x0000000040002278      0x438
+                0x0000000040002278                _rodata = .
  *(.rdata)
  *(.rodata)
- .rodata        0x0000000040001a2c       0x80 test.o
+ .rodata        0x0000000040002278      0x100 test.o
  *(.rodata.*)
  .rodata.hfunit_comp_float.cst4
-                0x0000000040001aac        0x4 hf-unit.o
+                0x0000000040002378        0x4 hf-unit.o
  .rodata.hfunit_comp_float.str1.4
-                0x0000000040001ab0        0x8 hf-unit.o
+                0x000000004000237c        0x8 hf-unit.o
                                           0xc (tamanho de relaxar)
  .rodata.hfunit_comp_vector.str1.4
-                0x0000000040001ab8       0x2e hf-unit.o
- *fill*         0x0000000040001ae6        0x2 
+                0x0000000040002384       0x2e hf-unit.o
+ *fill*         0x00000000400023b2        0x2 
  .rodata.irq0_handler
-                0x0000000040001ae8       0x84 interrupt.o
+                0x00000000400023b4       0x84 interrupt.o
  .rodata.dummy_handler.str1.4
-                0x0000000040001b6c        0x5 interrupt.o
- *fill*         0x0000000040001b71        0x3 
+                0x0000000040002438        0x5 interrupt.o
+ *fill*         0x000000004000243d        0x3 
  .rodata.exception_handler.str1.4
-                0x0000000040001b74       0x2c interrupt.o
+                0x0000000040002440       0x2c interrupt.o
  .rodata.irq0_handler.str1.4
-                0x0000000040001ba0       0x25 interrupt.o
- *fill*         0x0000000040001bc5        0x3 
+                0x000000004000246c       0x25 interrupt.o
+ *fill*         0x0000000040002491        0x3 
  .rodata.vsprintf
-                0x0000000040001bc8       0x84 libc.o
+                0x0000000040002494       0x84 libc.o
  .rodata.itoa.part.1.str1.4
-                0x0000000040001c4c       0x48 libc.o
+                0x0000000040002518       0x48 libc.o
  .rodata.print_float.str1.4
-                0x0000000040001c94        0x5 libc.o
- *fill*         0x0000000040001c99        0x3 
+                0x0000000040002560        0x5 libc.o
+ *fill*         0x0000000040002565        0x3 
  .rodata.vsprintf.str1.4
-                0x0000000040001c9c       0x19 libc.o
+                0x0000000040002568       0x19 libc.o
  .rodata.print_matrix.str1.4
-                0x0000000040001cb5        0x2 matrix.o
- *fill*         0x0000000040001cb5        0x3 
+                0x0000000040002581        0x2 matrix.o
  .rodata.mat_compare.str1.4
-                0x0000000040001cb8       0x13 test.o
-                                         0x17 (tamanho de relaxar)
- *fill*         0x0000000040001ccb        0x1 
- .rodata.super_mat_test.str1.4
-                0x0000000040001ccc       0x3a test.o
- *fill*         0x0000000040001d06        0x2 
+                0x0000000040002581        0x2 test.o
+ *fill*         0x0000000040002581        0x3 
+ .rodata.mat_test_0.str1.4
+                0x0000000040002584        0xf test.o
+ *fill*         0x0000000040002593        0x1 
+ .rodata.mat_test_1.str1.4
+                0x0000000040002594        0xf test.o
+ *fill*         0x00000000400025a3        0x1 
+ .rodata.mat_test_Ind.str1.4
+                0x00000000400025a4       0x13 test.o
+ *fill*         0x00000000400025b7        0x1 
+ .rodata.mat_test_randon.str1.4
+                0x00000000400025b8       0x12 test.o
+ *fill*         0x00000000400025ca        0x2 
  .rodata.main_test.str1.4
-                0x0000000040001d08       0x68 tester.o
-                0x0000000040001d70                _erodata = .
-                0x0000000040001d70                _data = .
+                0x00000000400025cc       0x68 tester.o
+                0x0000000040002634                _erodata = .
+                0x0000000040002634                _data = .
  *(.data)
  *(.data.*)
  .data.gpio_vector
-                0x0000000040001d70       0x10 interrupt.o
-                0x0000000040001d70                gpio_vector
+                0x0000000040002634       0x10 interrupt.o
+                0x0000000040002634                gpio_vector
  .data.irq_vector
-                0x0000000040001d80       0x20 interrupt.o
-                0x0000000040001d80                irq_vector
+                0x0000000040002644       0x20 interrupt.o
+                0x0000000040002644                irq_vector
  .data.timer_vector
-                0x0000000040001da0       0x40 interrupt.o
-                0x0000000040001da0                timer_vector
-                0x00000000400025e0                _gp = (. + 0x800)
+                0x0000000040002664       0x40 interrupt.o
+                0x0000000040002664                timer_vector
+                0x0000000040002ea4                _gp = (. + 0x800)
  *(.sdata)
  *(.sdata.*)
-                0x0000000040001de0                . = ALIGN (0x10)
-                0x0000000040001de0                _edata = .
+                0x00000000400026b0                . = ALIGN (0x10)
+ *fill*         0x00000000400026a4        0xc 
+                0x00000000400026b0                _edata = .
 
-.bss            0x0000000040001de0        0xc
-                0x0000000040001de0                _bss_start = .
+.bss            0x00000000400026b0        0xc
+                0x00000000400026b0                _bss_start = .
  *(.sbss)
  *(.sbss.*)
  .sbss.executed_tests
-                0x0000000040001de0        0x4 tester.o
-                0x0000000040001de0                executed_tests
+                0x00000000400026b0        0x4 tester.o
+                0x00000000400026b0                executed_tests
  .sbss.failed_tests
-                0x0000000040001de4        0x4 tester.o
-                0x0000000040001de4                failed_tests
+                0x00000000400026b4        0x4 tester.o
+                0x00000000400026b4                failed_tests
  .sbss.test_counter
-                0x0000000040001de8        0x4 tester.o
-                0x0000000040001de8                test_counter
+                0x00000000400026b8        0x4 tester.o
+                0x00000000400026b8                test_counter
  *(.bss)
  *(.bss.*)
-                0x0000000040001dec                . = ALIGN (0x4)
-                0x0000000040001dec                _bss_end = .
-                0x0000000040001dec                _end = .
+                0x00000000400026bc                . = ALIGN (0x4)
+                0x00000000400026bc                _bss_end = .
+                0x00000000400026bc                _end = .
 LOAD crt0.o
 LOAD fixed.o
 LOAD hf-unit.o
