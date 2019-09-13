@@ -15,11 +15,9 @@ Seções de entrada descartadas
  .text.printBits
                 0x0000000000000000       0xa0 hf-unit.o
  .text.hfunit_comp_float
-                0x0000000000000000      0x160 hf-unit.o
+                0x0000000000000000       0xf8 hf-unit.o
  .rodata.hfunit_comp_float.cst4
                 0x0000000000000000        0x4 hf-unit.o
- .rodata.hfunit_comp_float.str1.4
-                0x0000000000000000        0xc hf-unit.o
  .rodata.printBits.str1.4
                 0x0000000000000000        0x7 hf-unit.o
  COMMON         0x0000000000000000        0x8 hf-unit.o

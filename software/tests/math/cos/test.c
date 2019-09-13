@@ -29,7 +29,7 @@ void hfunit_run_tests(){
 	cos_test3();//30
 	cos_test4();//45
 	cos_test5();//60
-	cos_test6();//90
+	cos_test6();//720
 	cos_test7();//120
 	cos_test8();//135
 	cos_test9();//150
@@ -38,7 +38,7 @@ void hfunit_run_tests(){
 	cos_test12();//225
 	cos_test13();//240
 	cos_test14();//270
-	cos_test15();//300
+	cos_test15();//-90
 	cos_test16();//315
 	cos_test17();//330
 /**/
