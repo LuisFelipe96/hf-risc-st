@@ -17,6 +17,7 @@ void hfunit_run_tests(){
 	fix_exp_test0();
 	fix_exp_test1();
 	fix_exp_test2();
+	fix_exp_testA();
 	fix_exp_testNEG1();
 	fix_exp_testMax();
 	fix_exp_testMin();
@@ -50,7 +51,7 @@ int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
-|Entrada |     qualquer valor de entrad   |                                   |
+|Entrada |     qualquer numero real       |  Entrada não é um numero          |
 |--------|--------------------------------|-----------------------------------|
 |        |                                |                                   |
 |--------|--------------------------------|-----------------------------------|
@@ -163,7 +164,28 @@ void fix_exp_test2(){
 	//fix_print(fix_exp(entrada));
 	hfunit_comp_fixed(saida,fix_val(7.3890561),"FIX_EXP2");
 
-}/*
+}
+
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    a   |        erro                    |
+|--------|--------------------------------|
+
+
+*/
+void fix_exp_testA(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = 'a';
+	saida=fix_exp(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_exp(entrada));
+	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPA");
+
+}
+
+/*
 |Entrada |         Saida Esperada         | 
 |--------|--------------------------------|
 |   -1   |       0.36787944117            |
