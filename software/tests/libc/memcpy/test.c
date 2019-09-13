@@ -1,17 +1,19 @@
 #include <hf-risc.h>
 #include <hf-unit.h>
 
-union ufloat{
-	float f;
-	unsigned u;
-
-};
 // function under test 
-float sqrt(float arg);
+void *memcpy(void *dst, const void *src, uint32_t n);
 
 // list of individual tests
-void cos1_test();
-void test();
+void memcpy_test1();
+void memcpy_test2();
+void memcpy_test3();
+void memcpy_test4();
+void memcpy_test5();
+void memcpy_test6();
+void memcpy_test7();
+void memcpy_test8();
+void memcpy_test9();
 
 // main test
 void hfunit_run_tests(){
@@ -24,10 +26,31 @@ void hfunit_run_tests(){
 	memcpy_test7();
 	memcpy_test8();
 	memcpy_test9();
-	//test();
 }
+/*	
+==== CLASSES DE EQUIVALÊNCIA ====
+|   Entrada	  | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
+|-------------|--------------------------------|-----------------------------------|
+|	origem 	  |     dados a serem copiados     |								   |
+|-------------|--------------------------------|-----------------------------------|
+|	tamanho	  |     maior que 1			       | 			     0                 |
+|			  |								   | 	     valores negativos         |
+|			  |--------------------------------|-----------------------------------|
+|			  |		números inteiros		   | 	     nḿeros não inteiros       |
+|-------------|--------------------------------|-----------------------------------|
 
-// place here a nice description for each test
+*/
+/*	
+==== VALORES LIMITES ====
+tamanho:	0; 1
+*/
+
+/*
+Entrada: 
+	- origem:
+	- tamanho: 
+Resultado esperado: 
+*/
 void memcpy_test1(){
 	char orig[6] = "A";
 	char dest[6];
@@ -108,9 +131,3 @@ void memcpy_test9(){
 	//printf("%s",dest);
 	hfunit_comp_vector(dest,expected,sizeof(char)*6, "memcpy - Classe 9");
 }
-// place here a nice description for each test
-/*void sqrt4_test(){
-	float v = sqrt(4.0);
-	float expected = 2.0;
-	hfunit_comp_float(v,expected, "sqrt(4.0)");
-}*/
