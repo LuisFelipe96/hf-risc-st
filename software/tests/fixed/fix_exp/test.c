@@ -16,8 +16,11 @@ void hfunit_run_tests(){
 	//fix_exp_test();
 	fix_exp_test0();
 	fix_exp_test1();
+	fix_exp_test2();
+	fix_exp_testA();
+	fix_exp_testNEG1();
+	fix_exp_testMax();
 	fix_exp_testMin();
-	//fix_exp_testMax();
 }
 
 int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
@@ -48,7 +51,7 @@ int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage){
 /*
 |Entrada | Classes de Equivalência Válidas| Classes de Equivalência Inválidas |
 |--------|--------------------------------|-----------------------------------|
-|   int  |     0<=saida<+infinito         |          saida<0                  |
+|Entrada |     qualquer numero real       |  Entrada não é um numero          |
 |--------|--------------------------------|-----------------------------------|
 |        |                                |                                   |
 |--------|--------------------------------|-----------------------------------|
@@ -108,6 +111,14 @@ void fix_exp_test(){
 	}/**/
 	
 }
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    0   |             1.0                |
+|--------|--------------------------------|
+
+
+*/
 void fix_exp_test0(){
 	fixed_t entrada = fix_val(0.0);
 	fixed_t saida;
@@ -117,6 +128,15 @@ void fix_exp_test0(){
 	hfunit_comp_fixed(saida,fix_val(1.0),"FIX_EXP0");
 	
 }
+
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    1   |        2.718261                |
+|--------|--------------------------------|
+
+
+*/
 void fix_exp_test1(){
 	fixed_t entrada;
 	fixed_t saida;
@@ -127,16 +147,104 @@ void fix_exp_test1(){
 	hfunit_comp_fixed(saida,fix_val(2.718261),"FIX_EXP1");
 
 }
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    2   |        7.3890561               |
+|--------|--------------------------------|
+
+
+*/
+void fix_exp_test2(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(2.0);
+	saida=fix_exp(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_exp(entrada));
+	hfunit_comp_fixed(saida,fix_val(7.3890561),"FIX_EXP2");
+
+}
+
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|    a   |        erro                    |
+|--------|--------------------------------|
+
+
+*/
+void fix_exp_testA(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = 'a';
+	saida=fix_exp(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_exp(entrada));
+	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPA");
+
+}
+
+/*
+|Entrada |         Saida Esperada         | 
+|--------|--------------------------------|
+|   -1   |       0.36787944117            |
+|--------|--------------------------------|
+
+
+*/
+void fix_exp_testNEG1(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(-1.0);
+	saida=fix_exp(entrada);
+	//printBits(sizeof(entrada),entrada);
+	//fix_print(fix_exp(entrada));
+	hfunit_comp_fixed(saida,fix_val(0.36787944117),"FIX_EXP-1");
+
+}
+/*
+|Entrada      |         Saida Esperada         | 
+|-------------|--------------------------------|
+|22.1807097779|      4294967295.9999           |
+|-------------|--------------------------------|
+
+
+*/
+void fix_exp_testMax(){
+	fixed_t entrada;
+	fixed_t saida;
+	entrada = fix_val(22.1807097779);//9223372036854775807; //fix_val(0x8001);//fix_val(0xFFFFFFFFFFFFFFFF);
+	saida=fix_exp(entrada);
+	/*printf("\nMAX:");
+	fix_print(entrada);
+	printf(" ");
+	printBits(sizeof(entrada),entrada);
+	printf(" ");
+	fix_print(fix_exp(entrada));
+	printf("\n");*/
+	hfunit_comp_fixed(saida,fix_val(4294967295.9999),"FIX_EXPMAX");
+}
+/*
+|Entrada         |         Saida Esperada         | 
+|----------------|--------------------------------|
+|-4294967295.9999|             0.0                |
+|----------------|--------------------------------|
+
+
+*/
 void fix_exp_testMin(){
 	fixed_t entrada;
 	fixed_t saida;
-	entrada = fix_val(0xFFFFFFFFFFFFFFFF);
+	entrada =fix_val(-4294967295.9999);// 0x8000000000000001;//fix_val(22.1807097779);//9223372036854775807; //fix_val(0x8001);//fix_val(0xFFFFFFFFFFFFFFFF);
 	saida=fix_exp(entrada);
-	//printf("\nMAX:");
-	//fix_print(entrada);
-	//printBits(sizeof(entrada),entrada);
-	//printf(" ");
-	//fix_print(fix_exp(entrada));
-	//printf("\n");
+	/*printf("\nMAX:");
+	fix_print(entrada);
+	printf(" ");
+	printBits(sizeof(entrada),entrada);
+	printf(" ");
+	fix_print(fix_exp(entrada));
+	printf("\n");*/
 	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPMIN");
 }
+

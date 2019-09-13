@@ -308,7 +308,7 @@ Script do link-editor e mapa de memória
                 0x000000004ffffffc                _stack = 0x4ffffffc
                 0x0000000000000000                . = 0x0
 
-.text           0x0000000040000000     0x1480
+.text           0x0000000040000000     0x155c
  *(.text.init)
                 0x0000000040000000                _text = .
  *(.text)
@@ -436,99 +436,123 @@ Script do link-editor e mapa de memória
  .text.fix_exp_test1
                 0x0000000040001358       0x34 test.o
                 0x0000000040001358                fix_exp_test1
- .text.fix_exp_testMin
+ .text.fix_exp_test2
                 0x000000004000138c       0x34 test.o
-                0x000000004000138c                fix_exp_testMin
+                0x000000004000138c                fix_exp_test2
+ .text.fix_exp_testA
+                0x00000000400013c0       0x30 test.o
+                0x00000000400013c0                fix_exp_testA
+ .text.fix_exp_testNEG1
+                0x00000000400013f0       0x34 test.o
+                0x00000000400013f0                fix_exp_testNEG1
+ .text.fix_exp_testMax
+                0x0000000040001424       0x38 test.o
+                0x0000000040001424                fix_exp_testMax
+ .text.fix_exp_testMin
+                0x000000004000145c       0x30 test.o
+                0x000000004000145c                fix_exp_testMin
  .text.hfunit_run_tests
-                0x00000000400013c0       0x1c test.o
-                0x00000000400013c0                hfunit_run_tests
+                0x000000004000148c       0x2c test.o
+                0x000000004000148c                hfunit_run_tests
  .text.main_test
-                0x00000000400013dc       0xa4 tester.o
-                0x00000000400013dc                main_test
-                0x0000000040001480                _etext = .
+                0x00000000400014b8       0xa4 tester.o
+                0x00000000400014b8                main_test
+                0x000000004000155c                _etext = .
 
-.rela.dyn       0x0000000040001480        0x0
- .rela.text     0x0000000040001480        0x0 crt0.o
+.rela.dyn       0x000000004000155c        0x0
+ .rela.text     0x000000004000155c        0x0 crt0.o
  .rela.data.gpio_vector
-                0x0000000040001480        0x0 crt0.o
+                0x000000004000155c        0x0 crt0.o
  .rela.data.irq_vector
-                0x0000000040001480        0x0 crt0.o
+                0x000000004000155c        0x0 crt0.o
  .rela.data.timer_vector
-                0x0000000040001480        0x0 crt0.o
+                0x000000004000155c        0x0 crt0.o
 
-.data           0x0000000040001480      0x2d0
-                0x0000000040001480                _rodata = .
+.data           0x000000004000155c      0x304
+                0x000000004000155c                _rodata = .
  *(.rdata)
  *(.rodata)
  *(.rodata.*)
  .rodata.fix_print.str1.4
-                0x0000000040001480        0x5 fixed.o
- *fill*         0x0000000040001485        0x3 
+                0x000000004000155c        0x5 fixed.o
+ *fill*         0x0000000040001561        0x3 
  .rodata.irq0_handler
-                0x0000000040001488       0x84 interrupt.o
+                0x0000000040001564       0x84 interrupt.o
  .rodata.dummy_handler.str1.4
-                0x000000004000150c        0x5 interrupt.o
- *fill*         0x0000000040001511        0x3 
+                0x00000000400015e8        0x5 interrupt.o
+ *fill*         0x00000000400015ed        0x3 
  .rodata.exception_handler.str1.4
-                0x0000000040001514       0x2c interrupt.o
+                0x00000000400015f0       0x2c interrupt.o
  .rodata.irq0_handler.str1.4
-                0x0000000040001540       0x25 interrupt.o
- *fill*         0x0000000040001565        0x3 
+                0x000000004000161c       0x25 interrupt.o
+ *fill*         0x0000000040001641        0x3 
  .rodata.vsprintf
-                0x0000000040001568       0x84 libc.o
+                0x0000000040001644       0x84 libc.o
  .rodata.vsprintf.str1.4
-                0x00000000400015ec       0x19 libc.o
- *fill*         0x0000000040001605        0x3 
+                0x00000000400016c8       0x19 libc.o
+ *fill*         0x00000000400016e1        0x3 
  .rodata.fix_exp_test.str1.4
-                0x0000000040001608       0x2a test.o
- *fill*         0x0000000040001632        0x2 
+                0x00000000400016e4       0x2a test.o
+ *fill*         0x000000004000170e        0x2 
+ .rodata.fix_exp_test2.str1.4
+                0x0000000040001710        0x9 test.o
+ *fill*         0x0000000040001719        0x3 
+ .rodata.fix_exp_testA.str1.4
+                0x000000004000171c        0x9 test.o
+ *fill*         0x0000000040001725        0x3 
+ .rodata.fix_exp_testMax.str1.4
+                0x0000000040001728        0xb test.o
+ *fill*         0x0000000040001733        0x1 
  .rodata.fix_exp_testMin.str1.4
-                0x0000000040001634        0xb test.o
- *fill*         0x000000004000163f        0x1 
+                0x0000000040001734        0xb test.o
+ *fill*         0x000000004000173f        0x1 
+ .rodata.fix_exp_testNEG1.str1.4
+                0x0000000040001740        0xa test.o
+ *fill*         0x000000004000174a        0x2 
  .rodata.hfunit_comp_fixed.str1.4
-                0x0000000040001640       0x32 test.o
+                0x000000004000174c       0x32 test.o
                                          0x36 (tamanho de relaxar)
- *fill*         0x0000000040001672        0x2 
+ *fill*         0x000000004000177e        0x2 
  .rodata.main_test.str1.4
-                0x0000000040001674       0x68 tester.o
-                0x00000000400016dc                _erodata = .
-                0x00000000400016dc                _data = .
+                0x0000000040001780       0x68 tester.o
+                0x00000000400017e8                _erodata = .
+                0x00000000400017e8                _data = .
  *(.data)
  *(.data.*)
  .data.gpio_vector
-                0x00000000400016dc       0x10 interrupt.o
-                0x00000000400016dc                gpio_vector
+                0x00000000400017e8       0x10 interrupt.o
+                0x00000000400017e8                gpio_vector
  .data.irq_vector
-                0x00000000400016ec       0x20 interrupt.o
-                0x00000000400016ec                irq_vector
+                0x00000000400017f8       0x20 interrupt.o
+                0x00000000400017f8                irq_vector
  .data.timer_vector
-                0x000000004000170c       0x40 interrupt.o
-                0x000000004000170c                timer_vector
-                0x0000000040001f4c                _gp = (. + 0x800)
+                0x0000000040001818       0x40 interrupt.o
+                0x0000000040001818                timer_vector
+                0x0000000040002058                _gp = (. + 0x800)
  *(.sdata)
  *(.sdata.*)
-                0x0000000040001750                . = ALIGN (0x10)
- *fill*         0x000000004000174c        0x4 
-                0x0000000040001750                _edata = .
+                0x0000000040001860                . = ALIGN (0x10)
+ *fill*         0x0000000040001858        0x8 
+                0x0000000040001860                _edata = .
 
-.bss            0x0000000040001750        0xc
-                0x0000000040001750                _bss_start = .
+.bss            0x0000000040001860        0xc
+                0x0000000040001860                _bss_start = .
  *(.sbss)
  *(.sbss.*)
  .sbss.executed_tests
-                0x0000000040001750        0x4 tester.o
-                0x0000000040001750                executed_tests
+                0x0000000040001860        0x4 tester.o
+                0x0000000040001860                executed_tests
  .sbss.failed_tests
-                0x0000000040001754        0x4 tester.o
-                0x0000000040001754                failed_tests
+                0x0000000040001864        0x4 tester.o
+                0x0000000040001864                failed_tests
  .sbss.test_counter
-                0x0000000040001758        0x4 tester.o
-                0x0000000040001758                test_counter
+                0x0000000040001868        0x4 tester.o
+                0x0000000040001868                test_counter
  *(.bss)
  *(.bss.*)
-                0x000000004000175c                . = ALIGN (0x4)
-                0x000000004000175c                _bss_end = .
-                0x000000004000175c                _end = .
+                0x000000004000186c                . = ALIGN (0x4)
+                0x000000004000186c                _bss_end = .
+                0x000000004000186c                _end = .
 LOAD crt0.o
 LOAD fixed.o
 LOAD hf-unit.o
