@@ -1,11 +1,10 @@
 sudo: false
 language: c
 
-addons: 
-	apt: 
- 		sources:
-		- gcov
-		- valgrind
+# addons: 
+# apt:  		# sources:
+		# - gcov
+		# - valgrind
 		# dependencia, valgrind, gtool
 #
 
