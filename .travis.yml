@@ -5,6 +5,7 @@ addons:
 	apt: 
  		sources:
 		- gcov
+		- valgrind
 		# dependencia, valgrind, gtool
 #
 
