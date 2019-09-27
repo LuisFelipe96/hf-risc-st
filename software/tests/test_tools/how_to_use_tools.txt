@@ -1,0 +1,10 @@
+==========================
+cobertura de código - gcov
+==========================
+	gcc -fprofile-arcs -ftest-coverage hello.c
+	gcov hello.c
+	
+===========================
+análise estática - valgrind
+===========================
+	valgrind ./a.out
