@@ -1,14 +1,15 @@
 sudo: false
-language: c
-
-# addons: 
-# apt:  		# sources:
-		# - gcov
-		# - valgrind
-		# dependencia, valgrind, gtool
-#
-
-
+language: cpp
+compiler:
+  - gcc
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-6
+install:
+- "[ $CXX = g++ ] && export CXX=g++-6 || true"
 script:
-	-make
+  - make
 
