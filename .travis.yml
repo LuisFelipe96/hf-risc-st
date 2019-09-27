@@ -1,1 +1,14 @@
+sudo: false
 language: c
+
+addons: 
+	apt: 
+ 		sources:
+		- gcov
+		# dependencia, valgrind, gtool
+#
+
+
+script:
+	-make
+
