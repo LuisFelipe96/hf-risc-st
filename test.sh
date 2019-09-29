@@ -2,16 +2,17 @@
 
 cd ./software/tests/math/cos
 make test
-cd ..
-cd ./sin
+
+cd ../..
+cd ./math/sin
 #/software/tests/math
 make test
 cd ../..
 cd ./libc/memcpy
 #/software/tests/
 make test
-cd ..
-cd ./strcat
+cd ../..
+cd ./libc/strcat
 #/software/tests/libc
 make test
 cd ../..
@@ -19,7 +20,7 @@ cd ./fixed/fix_exp
 #/software/tests
 make test
 cd ..
-cd ./fix_sqrt
+cd ./fixed/fix_sqrt
 #/software/tests/fixed
 make test
 cd ../..
@@ -27,6 +28,6 @@ cd ./matrix/copy
 #/software/tests
 make test
 cd ..
-cd ./transposed
+cd ./matrix/transposed
 #software/tests/matrix/
 make test
