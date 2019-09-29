@@ -3,23 +3,30 @@
 cd ./software/tests/math/cos
 make test
 cd ..
-cd ./software/tests/math/sin
+cd ./sin
+#/software/tests/math
 make test
 cd ../..
-cd ./software/tests/libc/memcpy
+cd ./libc/memcpy
+#/software/tests/
 make test
 cd ..
-cd ./software/tests/libc/strcat
+cd ./strcat
+#/software/tests/libc
 make test
 cd ../..
-cd ./software/tests/fixed/fix_exp
+cd ./fixed/fix_exp
+#/software/tests
 make test
 cd ..
-cd ./software/tests/fixed/fix_sqrt
+cd ./fix_sqrt
+#/software/tests/fixed
 make test
 cd ../..
-cd ./software/tests/matrix/copy
+cd ./matrix/copy
+#/software/tests
 make test
 cd ..
-cd ./software/tests/matrix/transposed
+cd ./transposed
+#software/tests/matrix/
 make test
