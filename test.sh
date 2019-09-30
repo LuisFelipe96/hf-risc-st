@@ -5,51 +5,52 @@ make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
 wait
-cd ../..
-cd ./math/sin
-#/software/tests/math
+
+cd ..
+cd sin
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
 wait
+
 cd ../..
 cd ./libc/memcpy
-#/software/tests/
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
 wait
+
+cd ..
+cd strcat
+make test
+cppcheck test.c > out.log
+gcov hf_riscv_sim.c >gcov.log
+wait
+
 cd ../..
-cd ./libc/strcat
-#/software/tests/libc
+cd fixed/fix_exp
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
+gprof
 wait
-cd ../..
-cd ./fixed/fix_exp
-#/software/tests
-make test
-cppcheck test.c > out.log
-gcov hf_riscv_sim.c >gcov.log
-wait
+
 cd ..
 cd ./fix_sqrt
-#cd ./software/tests/fixed/fix_sqrt
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
 wait
+
 cd ../..
 cd ./matrix/copy
-#/software/tests
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
 wait
+
 cd ..
-cd ./transposed
-#software/tests/matrix/
+cd transposed
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
