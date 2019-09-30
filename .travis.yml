@@ -11,7 +11,7 @@ addons:
     - cppcheck
 before_install:
   - python --version
-  - pip install -U pip
+  - pip install --upgrade pip
 install:
 - "[ $CXX = g++ ] && export CXX=g++-6 || true"
 - pip install gdown
