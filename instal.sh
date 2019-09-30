@@ -6,10 +6,11 @@ tar xvzf riscv-gcc.tar.gz --strip-components 2
 ls
 cd ./riscv-elf/gcc-8.1.0/bin
 pwd
+ls
 echo "export PATH=/home/travis/build/LuisFelipe96/hf-risc-st/riscv-elf/gcc-8.1.0/bin:$PATH" >> ~/.bashrc
-cat ~/.bashrc
+#cat ~/.bashrc
 source ~/.bashrc
-cd ../../..
+#cd ../../..
 riscv32-unknown-elf-cpp --version
 
 
