@@ -1,4 +1,0 @@
-File '/home/luis/Downloads/hf-risc-st/tools/sim/hf_riscv_sim/hf_riscv_sim.c'
-Lines executed:49.83% of 295
-Creating 'hf_riscv_sim.c.gcov'
-
