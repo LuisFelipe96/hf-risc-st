@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd /home/travis/build/RISCV
+cd /home/travis/build/
+mkdir RISCV
+cd RISCV
 pwd
 gdown 'https://drive.google.com/uc?id=1ntx6Mpor-GWRl3CSiAQ47H8RQOKYeoWJ' 
 tar xvzf riscv-gcc.tar.gz --strip-components 2
