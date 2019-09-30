@@ -3,8 +3,8 @@
 
 gdown 'https://drive.google.com/uc?id=1ntx6Mpor-GWRl3CSiAQ47H8RQOKYeoWJ' 
 tar xvzf riscv-gcc.tar.gz --strip-components 2
-ls
-cd ./riscv-elf/gcc-8.1.0/bin
+#ls
+#cd ./riscv-elf/gcc-8.1.0/bin
 pwd
 ls
 echo "export PATH=/home/travis/build/LuisFelipe96/hf-risc-st/riscv-elf/gcc-8.1.0/bin:$PATH" >> ~/.bashrc
