@@ -13,9 +13,9 @@ pwd
 
 echo "export PATH=/home/travis/build/RISCV/riscv-elf/gcc-8.1.0/bin:$PATH" >> ~/.bashrc
 #cat ~/.bashrc
-source ~/.bashrc
+sudo source ~/.bashrc
 #cd ../../..
-./riscv32-unknown-elf-cpp --version
+riscv32-unknown-elf-cpp --version
 
 
 
