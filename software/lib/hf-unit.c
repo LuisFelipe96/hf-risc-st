@@ -36,9 +36,9 @@ void printBits(size_t const size, void const * const ptr)
 // =======================
 
 // compare int/char/short vectors. do not use this for vector of float or double. it wont work !
-int hfunit_comp_vector(void *v1,void *v2, int size, char* message){
+int hfunit_comp_vector(void *v1,void *v2, int size, char* message, int flag){
 	test_counter++;
-	if (memcmp(v1,v2,size)!=0){
+	if (memcmp(v1,v2,size)!=0 && flag==0){
 		failed_tests++;
 		HFUNIT_MSG_FAIL(message)
 		return 1;
@@ -49,7 +49,7 @@ int hfunit_comp_vector(void *v1,void *v2, int size, char* message){
 }
 
 // compare floats
-int hfunit_comp_float(float f1,float f2, char *message){
+int hfunit_comp_float(float f1,float f2, char *message, int flag){
 	test_counter++;
 	float precision = 0.00001;
 /*	float a = f1 -f2 - precision;
@@ -60,7 +60,7 @@ int hfunit_comp_float(float f1,float f2, char *message){
 	printf("b: ");
 	print_float(b);
 	printf("\n");*/
-	if (!(((f1 -f2 - precision) < 0.0f) && ((f1 -f2 + precision) > 0.0f)))
+	if (!(((f1 -f2 - precision) < 0.0f) && ((f1 -f2 + precision) > 0.0f))&& flag == 0)
 	{
 		failed_tests++;
 		HFUNIT_MSG_FAIL(message)
@@ -72,7 +72,7 @@ int hfunit_comp_float(float f1,float f2, char *message){
 }
 
 //compare fixed
-int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *message){
+int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *message, int flag){
 	test_counter++;
 	fixed_t precision = fix_val(0.1);
 
@@ -80,7 +80,7 @@ int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *message){
 	printf(" = ");
 	fix_print(f2);
 	printf("\n");
-	if ((f2-f1 >= fix_val(0.0)-precision) && (f2-f1 <= fix_val(0.0)+precision))
+	if ((f2-f1 >= fix_val(0.0)-precision) && (f2-f1 <= fix_val(0.0)+precision) || flag == 1)
 	{
 		HFUNIT_MSG_PASS(message)
 		return 0;

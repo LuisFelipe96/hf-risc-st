@@ -18,6 +18,8 @@ void cos_90_degrees_test();
 void cos_89_degrees_test();
 void cos_180_degrees_test();
 void cos_300_degrees_test();
+void cos_Neg90_degrees_test();
+void cos_720_degrees_test();
 
 
 // main test
@@ -59,17 +61,17 @@ void cos_infinity_test_1(){
 	float output;
 	char buf[30];
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %s rad.\n", buf);
+	//printf("\nAngle is %s rad.\n", buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(-infinity)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(-infinity)",0);
 }
 
 /*
@@ -82,17 +84,17 @@ void cos_infinity_test_2(){
 	float output;
 	char buf[30];
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %s rad.\n", buf);
+	//printf("\nAngle is %s rad.\n", buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(+infinity)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(+infinity)",0);
 }
 
 /*
@@ -105,17 +107,17 @@ void cos_zero_test_1(){
 	float output;
 	char buf[30];
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %s rad.\n", buf);
+	//printf("\nAngle is %s rad.\n", buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 
 /*
@@ -128,17 +130,17 @@ void cos_zero_test_2(){
 	float output;
 	char buf[30];
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %s rad.\n", buf);
+	//printf("\nAngle is %s rad.\n", buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos((+)quase zero)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos((+)quase zero)",1);
 }
 
 /*
@@ -151,17 +153,17 @@ void cos_zero_test_3(){
 	float output;
 	char buf[30];
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %s rad.\n", buf);
+	//printf("\nAngle is %s rad.\n", buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos((-)quase zero)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos((-)quase zero)",1);
 }
 
 /*
@@ -180,17 +182,17 @@ void cos_1_degree_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 
 /*
@@ -205,17 +207,17 @@ void cos_90_degrees_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 
 /*
@@ -230,17 +232,17 @@ void cos_89_degrees_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 
 /*
@@ -255,17 +257,17 @@ void cos_180_degrees_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 
 /*
@@ -280,17 +282,17 @@ void cos_300_degrees_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 /*
 Entrada:-90° = - pi rad
@@ -304,17 +306,17 @@ void cos_Neg90_degrees_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
+	/*printf(" ");
 	printBits(sizeof(float),&expected);
 	printf("=");
-	printBits(sizeof(float),&output);
+	printBits(sizeof(float),&output);*/
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }
 
 /*
@@ -329,15 +331,15 @@ void cos_720_degrees_test(){
 	char buf[30];
 	radians = degree * pi / 180;
 	ftoa(radians, buf, digits);
-	printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
+	//printf("\nAngle is %d degrees (%s rad).\n", (int)degree, buf);
 	output = cos(radians);
-	printf(" ");
-	printBits(sizeof(float),&expected);
-	printf("=");
-	printBits(sizeof(float),&output);
+	//printf(" ");
+	//printBits(sizeof(float),&expected);
+	//printf("=");
+	//printBits(sizeof(float),&output);
 	ftoa(expected, buf, digits);
-	printf("expected: %s\n", buf);
+	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
-	printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos(0)");
+	//printf("output: %s\n", buf);
+	hfunit_comp_float(output,expected, "cos(0)",0);
 }

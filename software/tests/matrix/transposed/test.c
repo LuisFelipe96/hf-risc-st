@@ -17,7 +17,6 @@ void mat_test_Ind();
 void mat_test_randon();
 void mat_test_Inf();
 void mat_test_Sup();
-void mat_test_Empy(); 
 
 void mat_compare(struct Matrix  *a, struct Matrix  *b, int row, int col, char* msg){
 	int x,y,flag=0;
@@ -26,7 +25,7 @@ void mat_compare(struct Matrix  *a, struct Matrix  *b, int row, int col, char* m
 			/*print_float(a->str[x][y]);
 			print_float(b->str[x][y]);
 			printf("\n");*/
-			hfunit_comp_float(a->str[x][y],b->str[x][y],msg);
+			hfunit_comp_float(a->str[x][y],b->str[x][y],msg,0);
 			/*if(a->str != b->str){
 				printf("ERRO\n");
 				flag=1;
@@ -47,7 +46,6 @@ void hfunit_run_tests(){
 	mat_test_randon();
 	mat_test_Inf();
 	mat_test_Sup();
-	mat_test_Empy(); 
 	//mat_test_MAX();
 	//mat_test_MIN();
 	//mat_test();
@@ -290,35 +288,4 @@ void mat_test_Sup() {
 	print_matrix(M2);/**/
 	mat_compare(&M4,&M2,4,4, "Test - Mat - Diag Sup");
 }
-/*
-|Entrada                                                        |                         Saida Esperada                    | 
-|---------------------------------------------------------------|-----------------------------------------------------------|
-|                                                               |                                                           |
-|                                                               |                                                           |
-|                                                               |                                                           |
-|                                                               |                                                           |
-|---------------------------------------------------------------|-----------------------------------------------------------|
 
-
-*/
-void mat_test_Empy(){
-
-	struct Matrix M1, M2, M4;
-	typ_var Multiplicator = val(5);
-
-	typ_var val1[16];
-	typ_var val2[16];
-
-	M1 = set_values(4, 4, val1);
-	M2 = set_values(4, 4, val2);
-	//----------------------------FUNCTIONS TESTS-----------------------------------
-
-	/*printf("Matrix 1 is:\n");
-	print_matrix(M1);
-	printf("copy of Matrix 1 is:\n");/**/
-	M4 = transposed(M1);
-	/*print_matrix(M4);
-	printf("Expected is:\n");
-	print_matrix(M2);/**/
-	mat_compare(&M4,&M2,4,4,"Test - Mat empy");
-}

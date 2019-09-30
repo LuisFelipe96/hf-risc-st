@@ -9,6 +9,13 @@ fixed_t fix_exp(fixed_t arg);
 
 // list of individual tests
 void fix_exp_test();
+void fix_exp_test0();
+void fix_exp_test1();
+void fix_exp_test2();
+void fix_exp_testA();
+void fix_exp_testNEG1();
+void fix_exp_testMax();
+void fix_exp_testMin();
 
 // main test
 void hfunit_run_tests(){
@@ -126,7 +133,7 @@ void fix_exp_test0(){
 	//fix_print(fix_exp(entrada));
 	saida=fix_exp(entrada);
 	//printBits(sizeof(entrada),entrada);
-	hfunit_comp_fixed(saida,fix_val(1.0),"FIX_EXP0");
+	hfunit_comp_fixed(saida,fix_val(1.0),"FIX_EXP0",0);
 	
 }
 
@@ -145,7 +152,7 @@ void fix_exp_test1(){
 	saida=fix_exp(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_exp(entrada));
-	hfunit_comp_fixed(saida,fix_val(2.718261),"FIX_EXP1");
+	hfunit_comp_fixed(saida,fix_val(2.718261),"FIX_EXP1",0);
 
 }
 /*
@@ -163,7 +170,7 @@ void fix_exp_test2(){
 	saida=fix_exp(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_exp(entrada));
-	hfunit_comp_fixed(saida,fix_val(7.3890561),"FIX_EXP2");
+	hfunit_comp_fixed(saida,fix_val(7.3890561),"FIX_EXP2",0);
 
 }
 
@@ -182,7 +189,7 @@ void fix_exp_testA(){
 	saida=fix_exp(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_exp(entrada));
-	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPA");
+	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPA",1);
 
 }
 
@@ -201,7 +208,7 @@ void fix_exp_testNEG1(){
 	saida=fix_exp(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_exp(entrada));
-	hfunit_comp_fixed(saida,fix_val(0.36787944117),"FIX_EXP-1");
+	hfunit_comp_fixed(saida,fix_val(0.36787944117),"FIX_EXP-1",0);
 
 }
 /*
@@ -224,7 +231,7 @@ void fix_exp_testMax(){
 	printf(" ");
 	fix_print(fix_exp(entrada));
 	printf("\n");*/
-	hfunit_comp_fixed(saida,fix_val(4294967295.9999),"FIX_EXPMAX");
+	hfunit_comp_fixed(saida,fix_val(4294967295.9999),"FIX_EXPMAX",1);
 }
 /*
 |Entrada         |         Saida Esperada         | 
@@ -246,6 +253,6 @@ void fix_exp_testMin(){
 	printf(" ");
 	fix_print(fix_exp(entrada));
 	printf("\n");*/
-	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPMIN");
+	hfunit_comp_fixed(saida,fix_val(0.0),"FIX_EXPMIN",1);
 }
 

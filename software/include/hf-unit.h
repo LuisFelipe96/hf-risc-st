@@ -45,10 +45,10 @@ void printBits(size_t const size, void const * const ptr);
 // =======================
 
 // compare int/char/short vectors. do not use this for vector of float or double. it wont work !
-int hfunit_comp_vector(void *v1,void *v2, int size, char* message);
+int hfunit_comp_vector(void *v1,void *v2, int size, char* message, int flag);
 
 // compare floats
-int hfunit_comp_float(float f1,float f2, char *message);
+int hfunit_comp_float(float f1,float f2, char *message, int flag);
 
 // compare fixed
 //int hfunit_comp_fixed(fixed_t f1, fixed_t f2, char *menssage);

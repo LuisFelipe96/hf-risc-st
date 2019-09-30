@@ -52,7 +52,7 @@ void memcpy_tamanho_test1(){
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
 	//printf("dest: %s\n",dest);
-	hfunit_comp_vector(dest,expected,tamanho, "memcpy - tamanho = 1");
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - tamanho = 1",0);
 }
 
 /*
@@ -69,7 +69,7 @@ void memcpy_tamanho_test2(){
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
 	//printf("dest: %s\n",dest);
-	hfunit_comp_vector(dest,expected,1, "memcpy - tamanho = 0");
+	hfunit_comp_vector(dest,expected,1, "memcpy - tamanho = 0",0);
 }
 
 /*
@@ -86,7 +86,7 @@ void memcpy_origem_test1(){
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
 	//printf("dest: %s\n",dest);
-	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = barra 0");
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = barra 0",0);
 }
 
 /*
@@ -103,7 +103,7 @@ void memcpy_origem_test2(){
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
 	//printf("dest: %s\n",dest);
-	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = ghb");
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = ghb",0);
 }
 
 /*
@@ -120,7 +120,7 @@ void memcpy_origem_test3(){
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
 	//printf("dest: %s\n",dest);
-	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = @");
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = @",0);
 }
 
 /*
@@ -138,6 +138,6 @@ void memcpy_origem_test4(){
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
 	//printf("dest: %s\n",dest);
-	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = 1234567");
+	hfunit_comp_vector(dest,expected,tamanho, "memcpy - origem = 1234567",0);
 }
 

@@ -24,7 +24,7 @@ void mat_compare(struct Matrix  *a, struct Matrix  *b, int row, int col, char* m
 			/*print_float(a->str[x][y]);
 			print_float(b->str[x][y]);
 			printf("\n");*/
-			hfunit_comp_float(a->str[x][y],b->str[x][y],msg);
+			hfunit_comp_float(a->str[x][y],b->str[x][y],msg,0);
 			/*if(a->str != b->str){
 				printf("ERRO\n");
 				flag=1;

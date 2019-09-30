@@ -97,7 +97,7 @@ void fix_sqrt_test0(){
 	//fix_print(fix_sqrt(entrada));
 	saida=fix_sqrt(entrada);
 	//printBits(sizeof(entrada),entrada);
-	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrt0");
+	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrt0",0);
 	
 }
 
@@ -114,7 +114,7 @@ void fix_sqrt_test1(){
 	saida=fix_sqrt(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_sqrt(entrada));
-	hfunit_comp_fixed(saida,fix_val(1.0),"fix_sqrt1");
+	hfunit_comp_fixed(saida,fix_val(1.0),"fix_sqrt1",0);
 
 }
 /*
@@ -130,7 +130,7 @@ void fix_sqrt_test2(){
 	saida=fix_sqrt(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_sqrt(entrada));
-	hfunit_comp_fixed(saida,fix_val(1.41421356237),"fix_sqrt2");
+	hfunit_comp_fixed(saida,fix_val(1.41421356237),"fix_sqrt2",0);
 
 }
 /*
@@ -146,7 +146,7 @@ void fix_sqrt_testA(){
 	saida=fix_sqrt(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_sqrt(entrada));
-	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrtA");
+	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrtA",1);
 
 }
 
@@ -163,7 +163,7 @@ void fix_sqrt_testNEG1(){
 	saida=fix_sqrt(entrada);
 	//printBits(sizeof(entrada),entrada);
 	//fix_print(fix_sqrt(entrada));
-	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrt-1");
+	hfunit_comp_fixed(saida,fix_val(0.0),"fix_sqrt-1",0);
 
 }
 
@@ -185,5 +185,5 @@ void fix_sqrt_testMax(){
 	printf(" ");
 	fix_print(fix_sqrt(entrada));
 	printf("\n");*/
-	hfunit_comp_fixed(saida,fix_val(65536),"fix_sqrtMAX");
+	hfunit_comp_fixed(saida,fix_val(65536),"fix_sqrtMAX",1);
 }
