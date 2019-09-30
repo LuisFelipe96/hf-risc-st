@@ -9,6 +9,8 @@ addons:
     packages:
     - g++-6
     - cppcheck
+    - gprof
+    - gcov
 before_install:
   - python --version
 install:
