@@ -14,7 +14,7 @@ source ~/.bashrc
 riscv32-unknown-elf-cpp --version
 
 
-#!/bin/bash
+
 
 
 #gdown 'https://drive.google.com/uc?id=1ntx6Mpor-GWRl3CSiAQ47H8RQOKYeoWJ' 
