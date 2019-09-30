@@ -13,7 +13,7 @@ before_install:
   - python --version
 install:
 - "[ $CXX = g++ ] && export CXX=g++-6 || true"
-- pip install gdown
+- sudo pip install gdown
 script:
   - make
 
