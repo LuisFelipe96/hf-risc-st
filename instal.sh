@@ -7,6 +7,7 @@ ls
 cd ./riscv-elf/gcc-8.1.0/bin
 pwd
 echo "export PATH=/home/travis/build/LuisFelipe96/hf-risc-st/riscv-elf/gcc-8.1.0/bin:$PATH" >> ~/.bashrc
+cat ~/.bashrc
 source ~/.bashrc
 cd ../../..
 riscv32-unknown-elf-cpp --version
