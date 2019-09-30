@@ -5,9 +5,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ..
@@ -16,9 +16,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ../..
@@ -27,9 +27,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ..
@@ -38,9 +38,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ../..
@@ -49,9 +49,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ..
@@ -60,9 +60,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ../..
@@ -71,9 +71,9 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
 wait
 
 cd ..
@@ -82,6 +82,6 @@ make test
 cppcheck test.c > cppcheck.log
 gcov hf_riscv_sim.c >gcov.log
 gprof ./hf_riscv_sim gmon.out >gprof.log
-head cppcheck.log -n 200
-head gcov.log -n 200
-head gprof.log -n 200
+#head cppcheck.log -n 200
+#head gcov.log -n 200
+#head gprof.log -n 200
