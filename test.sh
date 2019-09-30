@@ -32,7 +32,7 @@ cd fixed/fix_exp
 make test
 cppcheck test.c > out.log
 gcov hf_riscv_sim.c >gcov.log
-gprof
+gprof ./hf_riscv_sim gmon.out >gprof.log
 wait
 
 cd ..
