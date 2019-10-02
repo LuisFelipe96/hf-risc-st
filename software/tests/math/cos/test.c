@@ -140,7 +140,7 @@ void cos_zero_test_2(){
 	//printf("expected: %s\n", buf);
 	ftoa(output, buf, digits);
 	//printf("output: %s\n", buf);
-	hfunit_comp_float(output,expected, "cos((+)quase zero)",1);
+	hfunit_comp_float(output,expected, "cos((+)quase zero)",0);
 }
 
 /*
