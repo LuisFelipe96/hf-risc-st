@@ -28,7 +28,7 @@ BSS_CLEAR:
 	jal	ra, main
 
 	li	s10, 0xe0000000		# this will interrupt the simulation (assertion)
-	sw	zero, 0(s10)
+	sw	a0, 0(s10)  
 
 L1:
 	beq	zero, zero, L1
