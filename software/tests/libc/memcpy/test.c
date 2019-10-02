@@ -47,7 +47,7 @@ Resultado esperado: A
 void memcpy_tamanho_test1(){
 	char orig[1] = "A";
 	char dest[1];
-	char expected[1] = "A";
+	char expected[1] = "B";
 	int tamanho = sizeof(char);
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
