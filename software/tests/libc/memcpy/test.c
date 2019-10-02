@@ -64,7 +64,7 @@ Resultado esperado: 'null'
 void memcpy_tamanho_test2(){
 	char orig = "A";
 	char dest;
-	char expected = NULL;
+	char expected = "B";
 	int tamanho = 0;
 	memcpy(dest,orig,tamanho);
 	//printf("expected: %s\n",expected);
