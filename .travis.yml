@@ -19,6 +19,7 @@ install:
 - ./instal.sh
 script:
   - cd ./software/tests/math/cos
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -29,6 +30,7 @@ script:
   
   - cd ..
   - cd sin
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -39,6 +41,7 @@ script:
   
   - cd ../..
   - cd ./libc/memcpy
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -49,6 +52,7 @@ script:
   
   - cd ..
   - cd strcat
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -59,6 +63,7 @@ script:
   
   - cd ../..
   - cd fixed/fix_exp
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -69,6 +74,7 @@ script:
   
   - cd ..
   - cd ./fix_sqrt
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -79,6 +85,7 @@ script:
   
   - cd ../..
   - cd ./matrix/copy
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
@@ -89,6 +96,7 @@ script:
   
   - cd ..
   - cd transposed
+  - make clean
   - make test
   - cppcheck test.c > cppcheck.log
   - gcov hf_riscv_sim.c >gcov.log
