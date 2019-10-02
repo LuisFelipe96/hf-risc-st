@@ -1,13 +1,10 @@
 Flat profile:
 
 Each sample counts as 0.01 seconds.
+ no time accumulated
+
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  ns/call  ns/call  name    
- 50.02      0.01     0.01    65679   152.32   152.32  cycle
- 50.02      0.02     0.01                             main
-  0.00      0.02     0.00    65679     0.00     0.00  mem_fetch
-  0.00      0.02     0.00     3086     0.00     0.00  mem_write
-  0.00      0.02     0.00     2766     0.00     0.00  mem_read
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -21,13 +18,13 @@ seconds    function alone.  This is the major sort for this
 
 calls      the number of times this function was invoked, if
            this function is profiled, else blank.
- 
+
  self      the average number of milliseconds spent in this
 ms/call    function per call, if this function is profiled,
 	   else blank.
 
  total     the average number of milliseconds spent in this
-ms/call    function and its descendents per call, if this 
+ms/call    function and its descendents per call, if this
 	   function is profiled, else blank.
 
 name       the name of the function.  This is the minor sort
@@ -36,7 +33,7 @@ name       the name of the function.  This is the minor sort
 	   in parenthesis it shows where it would appear in
 	   the gprof listing if it were to be printed.
 
-Copyright (C) 2012 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
@@ -45,28 +42,9 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 49.98% of 0.02 seconds
+granularity: each sample hit covers 2 byte(s) no time propagated
 
 index % time    self  children    called     name
-                                                 <spontaneous>
-[1]    100.0    0.01    0.01                 main [1]
-                0.01    0.00   65679/65679       cycle [2]
------------------------------------------------
-                0.01    0.00   65679/65679       main [1]
-[2]     50.0    0.01    0.00   65679         cycle [2]
-                0.00    0.00   65679/65679       mem_fetch [3]
-                0.00    0.00    3086/3086        mem_write [4]
-                0.00    0.00    2766/2766        mem_read [5]
------------------------------------------------
-                0.00    0.00   65679/65679       cycle [2]
-[3]      0.0    0.00    0.00   65679         mem_fetch [3]
------------------------------------------------
-                0.00    0.00    3086/3086        cycle [2]
-[4]      0.0    0.00    0.00    3086         mem_write [4]
------------------------------------------------
-                0.00    0.00    2766/2766        cycle [2]
-[5]      0.0    0.00    0.00    2766         mem_read [5]
------------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
  the total amount of time spent in each function and its children.
@@ -150,7 +128,7 @@ index % time    self  children    called     name
  for that member, how many times it was called from other members of
  the cycle.
 
-Copyright (C) 2012 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
@@ -158,5 +136,3 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [2] cycle                   [3] mem_fetch               [4] mem_write
-   [1] main                    [5] mem_read

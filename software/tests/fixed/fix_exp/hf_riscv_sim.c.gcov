@@ -1,0 +1,502 @@
+        -:    0:Source:/home/joicemarek/Repositories/hf-risc-st/tools/sim/hf_riscv_sim/hf_riscv_sim.c
+        -:    0:Graph:hf_riscv_sim.gcno
+        -:    0:Data:hf_riscv_sim.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/* file:          hf_riscv_sim.c
+        -:    2: * description:   HF-RISCV simulator
+        -:    3: * date:          11/2015 (first release), 03/2019 (last update)
+        -:    4: * author:        Sergio Johann Filho <sergio.filho@pucrs.br>
+        -:    5: */
+        -:    6:
+        -:    7:#include <stdio.h>
+        -:    8:#include <stdlib.h>
+        -:    9:#include <string.h>
+        -:   10:#include <stdint.h>
+        -:   11:
+        -:   12:#define MEM_SIZE			0x00100000
+        -:   13:#define SRAM_BASE			0x40000000
+        -:   14:#define EXIT_TRAP			0xe0000000
+        -:   15:
+        -:   16:#define IRQ_VECTOR			0xf0000000
+        -:   17:#define IRQ_CAUSE			0xf0000010
+        -:   18:#define IRQ_MASK			0xf0000020
+        -:   19:#define IRQ_STATUS			0xf0000030
+        -:   20:#define IRQ_EPC				0xf0000040
+        -:   21:#define EXTIO_IN			0xf0000080
+        -:   22:#define EXTIO_OUT			0xf0000090
+        -:   23:#define DEBUG_ADDR			0xf00000d0
+        -:   24:
+        -:   25:#define S0CAUSE				0xe1000400
+        -:   26:
+        -:   27:#define GPIOCAUSE			0xe1010400
+        -:   28:#define GPIOCAUSEINV			0xe1010800
+        -:   29:#define GPIOMASK			0xe1010c00
+        -:   30:
+        -:   31:#define PADDR				0xe1014000
+        -:   32:#define PAOUT				0xe1014010
+        -:   33:#define PAIN				0xe1014020
+        -:   34:#define PAININV				0xe1014030
+        -:   35:#define PAINMASK			0xe1014040
+        -:   36:
+        -:   37:#define TIMERCAUSE			0xe1020400
+        -:   38:#define TIMERCAUSE_INV			0xe1020800
+        -:   39:#define TIMERMASK			0xe1020c00
+        -:   40:
+        -:   41:#define TIMER0				0xe1024000
+        -:   42:#define TIMER1				0xe1024400
+        -:   43:#define TIMER1_PRE			0xe1024410
+        -:   44:#define TIMER1_CTC			0xe1024420
+        -:   45:#define TIMER1_OCR			0xe1024430
+        -:   46:
+        -:   47:#define UARTCAUSE			0xe1030400
+        -:   48:#define UARTCAUSE_INV			0xe1030800
+        -:   49:#define UARTMASK			0xe1030c00
+        -:   50:
+        -:   51:#define UART0				0xe1034000
+        -:   52:#define UART0_DIV			0xe1034010
+        -:   53:
+        -:   54:#define ntohs(A) ( ((A)>>8) | (((A)&0xff)<<8) )
+        -:   55:#define htons(A) ntohs(A)
+        -:   56:#define ntohl(A) ( ((A)>>24) | (((A)&0xff0000)>>8) | (((A)&0xff00)<<8) | ((A)<<24) )
+        -:   57:#define htonl(A) ntohl(A)
+        -:   58:
+        -:   59:typedef struct {
+        -:   60:	int32_t r[32];
+        -:   61:	uint32_t pc, pc_next;
+        -:   62:	int8_t *mem;
+        -:   63:	uint32_t vector, cause, mask, status, status_dly[4], epc, exception;
+        -:   64:	uint32_t s0cause;
+        -:   65:	uint32_t gpiocause, gpiocause_inv, gpiomask;
+        -:   66:	uint32_t paddr, paout, pain, pain_inv, pain_mask;
+        -:   67:	uint32_t timercause, timercause_inv, timermask;
+        -:   68:	uint32_t timer0, timer1, timer1_pre, timer1_ctc, timer1_ocr;
+        -:   69:	uint32_t uartcause, uartcause_inv, uartmask;
+        -:   70:	uint64_t cycles;
+        -:   71:} state;
+        -:   72:
+        -:   73:int8_t sram[MEM_SIZE];
+        -:   74:
+        -:   75:FILE *fptr;
+        -:   76:int32_t log_enabled = 0;
+        -:   77:
+    #####:   78:void dumpregs(state *s){
+        -:   79:	int32_t i;
+        -:   80:
+    #####:   81:	for (i = 0; i < 32; i+=4){
+    #####:   82:		printf("\nr%02d [%08x] r%02d [%08x] r%02d [%08x] r%02d [%08x]", \
+    #####:   83:		i, s->r[i], i+1, s->r[i+1], i+2, s->r[i+2], i+3, s->r[i+3]);
+        -:   84:	}
+    #####:   85:	printf("\n");
+    #####:   86:}
+        -:   87:
+    #####:   88:void bp(state *s, uint32_t ir){
+    #####:   89:	printf("\npc: %08x, ir: %08x", s->pc, ir);
+    #####:   90:	dumpregs(s);
+    #####:   91:	getchar();
+    #####:   92:}
+        -:   93:
+    39069:   94:static int32_t mem_fetch(state *s, uint32_t address){
+    39069:   95:	uint32_t value=0;
+        -:   96:	uint32_t *ptr;
+        -:   97:
+    39069:   98:	ptr = (uint32_t *)(s->mem + (address % MEM_SIZE));
+    39069:   99:	value = *ptr;
+        -:  100:
+    39069:  101:	return(value);
+        -:  102:}
+        -:  103:
+     2540:  104:static int32_t mem_read(state *s, int32_t size, uint32_t address){
+     2540:  105:	uint32_t value=0;
+        -:  106:	uint32_t *ptr;
+        -:  107:
+     2540:  108:	switch (address){
+    #####:  109:		case IRQ_VECTOR:	return s->vector;
+    #####:  110:		case IRQ_CAUSE:		return s->cause;
+    #####:  111:		case IRQ_MASK:		return s->mask;
+    #####:  112:		case IRQ_STATUS:	return s->status;
+    #####:  113:		case IRQ_EPC:		return s->epc;
+    #####:  114:		case S0CAUSE:		return s->s0cause;
+    #####:  115:		case GPIOCAUSE:		return s->gpiocause;
+    #####:  116:		case GPIOCAUSEINV:	return s->gpiocause_inv;
+    #####:  117:		case GPIOMASK:		return s->gpiomask;
+    #####:  118:		case PADDR:		return s->paddr;
+    #####:  119:		case PAOUT:		return s->paout;
+    #####:  120:		case PAIN:		return s->pain;
+    #####:  121:		case PAININV:		return s->pain_inv;
+    #####:  122:		case PAINMASK:		return s->pain_mask;
+    #####:  123:		case TIMERCAUSE:	return s->timercause;
+    #####:  124:		case TIMERCAUSE_INV:	return s->timercause_inv;
+    #####:  125:		case TIMERMASK:		return s->timermask;
+    #####:  126:		case TIMER0:		return s->timer0;
+    #####:  127:		case TIMER1:		return s->timer1;
+    #####:  128:		case TIMER1_PRE:	return s->timer1_pre;
+    #####:  129:		case TIMER1_CTC:	return s->timer1_ctc;
+    #####:  130:		case TIMER1_OCR:	return s->timer1_ocr;
+      544:  131:		case UARTCAUSE:		return s->uartcause;
+    #####:  132:		case UARTCAUSE_INV:	return s->uartcause_inv;
+    #####:  133:		case UARTMASK:		return s->uartmask;
+    #####:  134:		case UART0:		return getchar();
+    #####:  135:		case UART0_DIV:		return 0;
+        -:  136:	}
+     1996:  137:	if (address >= EXIT_TRAP) return 0;
+        -:  138:
+     1995:  139:	ptr = (uint32_t *)(s->mem + (address % MEM_SIZE));
+        -:  140:
+     1995:  141:	switch (size){
+     1376:  142:		case 4:
+     1376:  143:			if(address & 3){
+    #####:  144:				printf("\nunaligned access (load word) pc=0x%x addr=0x%x", s->pc, address);
+    #####:  145:				dumpregs(s);
+    #####:  146:				exit(1);
+        -:  147:			}else{
+     1376:  148:				value = *(int32_t *)ptr;
+        -:  149:			}
+     1376:  150:			break;
+    #####:  151:		case 2:
+    #####:  152:			if(address & 1){
+    #####:  153:				printf("\nunaligned access (load halfword) pc=0x%x addr=0x%x", s->pc, address);
+    #####:  154:				dumpregs(s);
+    #####:  155:				exit(1);
+        -:  156:			}else{
+    #####:  157:				value = *(int16_t *)ptr;
+        -:  158:			}
+    #####:  159:			break;
+      619:  160:		case 1:
+      619:  161:			value = *(int8_t *)ptr;
+      619:  162:			break;
+    #####:  163:		default:
+    #####:  164:			printf("\nerror");
+        -:  165:	}
+        -:  166:
+     1995:  167:	return(value);
+        -:  168:}
+        -:  169:
+     2440:  170:static void mem_write(state *s, int32_t size, uint32_t address, uint32_t value){
+        -:  171:	uint32_t i;
+        -:  172:	uint32_t *ptr;
+        -:  173:
+     2440:  174:	switch (address){
+        1:  175:		case IRQ_VECTOR:	s->vector = value; return;
+        1:  176:		case IRQ_MASK:		s->mask = value; return;
+        1:  177:		case IRQ_STATUS:	if (value == 0){ s->status = 0; for (i = 0; i < 4; i++) s->status_dly[i] = 0; }else{ s->status_dly[3] = value; } return;
+    #####:  178:		case IRQ_EPC:		s->epc = value; return;
+    #####:  179:		case GPIOCAUSE:		s->gpiocause = value & 0xffff; return;
+    #####:  180:		case GPIOCAUSEINV:	s->gpiocause_inv = value & 0xffff; return;
+    #####:  181:		case GPIOMASK:		s->gpiomask = value & 0xffff; return;
+    #####:  182:		case PADDR:		s->paddr = value & 0xffff; return;
+    #####:  183:		case PAOUT:		s->paout = value & 0xffff; return;
+        -:  184://		case PAIN:		s->gpiocause = value & 0xffff; return;
+    #####:  185:		case PAININV:		s->pain_inv = value & 0xffff; return;
+    #####:  186:		case PAINMASK:		s->pain_mask = value & 0xffff; return;
+    #####:  187:		case TIMERCAUSE_INV:	s->timercause_inv = value & 0xff; return;
+    #####:  188:		case TIMERMASK:		s->timermask = value & 0xff; return;
+    #####:  189:		case TIMER0:		return;
+    #####:  190:		case TIMER1:		s->timer1 = value & 0xffff; return;
+    #####:  191:		case TIMER1_PRE:	s->timer1_pre = value & 0xffff; return;
+    #####:  192:		case TIMER1_CTC:	s->timer1_ctc = value & 0xffff; return;
+    #####:  193:		case TIMER1_OCR:	s->timer1_ocr = value & 0xffff; return;
+    #####:  194:		case UARTCAUSE_INV:	s->uartcause_inv = value & 0xff; return;
+    #####:  195:		case UARTMASK:		s->uartmask = value & 0xff; return;
+        -:  196:
+        1:  197:		case EXIT_TRAP:
+        1:  198:			fflush(stdout);
+        1:  199:			if (log_enabled)
+    #####:  200:				fclose(fptr);
+        1:  201:			printf("\nend of simulation - %ld cycles.\n", s->cycles);
+        1:  202:			exit(s->r[10]);
+    #####:  203:		case DEBUG_ADDR:
+    #####:  204:			if (log_enabled)
+    #####:  205:				fprintf(fptr, "%c", (int8_t)(value & 0xff));
+    #####:  206:			return;
+      545:  207:		case UART0:
+      545:  208:			fprintf(stdout, "%c", (int8_t)(value & 0xff));
+      545:  209:			return;
+        1:  210:		case UART0_DIV:
+        1:  211:			return;
+        -:  212:	}
+     1890:  213:	if (address >= EXIT_TRAP) return;
+        -:  214:
+     1889:  215:	ptr = (uint32_t *)(s->mem + (address % MEM_SIZE));
+        -:  216:
+     1889:  217:	switch (size){
+     1712:  218:		case 4:
+     1712:  219:			if(address & 3){
+    #####:  220:				printf("\nunaligned access (store word) pc=0x%x addr=0x%x", s->pc, address);
+    #####:  221:				dumpregs(s);
+    #####:  222:				exit(1);
+        -:  223:			}else{
+     1712:  224:				*(int32_t *)ptr = value;
+        -:  225:			}
+     1712:  226:			break;
+    #####:  227:		case 2:
+    #####:  228:			if(address & 1){
+    #####:  229:				printf("\nunaligned access (store halfword) pc=0x%x addr=0x%x", s->pc, address);
+    #####:  230:				dumpregs(s);
+    #####:  231:				exit(1);
+        -:  232:			}else{
+    #####:  233:				*(int16_t *)ptr = (uint16_t)value;
+        -:  234:			}
+    #####:  235:			break;
+      177:  236:		case 1:
+      177:  237:			*(int8_t *)ptr = (uint8_t)value;
+      177:  238:			break;
+    #####:  239:		default:
+    #####:  240:			printf("\nerror");
+        -:  241:	}
+        -:  242:}
+        -:  243:
+    39069:  244:void cycle(state *s){
+        -:  245:	uint32_t inst, i;
+        -:  246:	uint32_t opcode, rd, rs1, rs2, funct3, funct7, imm_i, imm_s, imm_sb, imm_u, imm_uj;
+    39069:  247:	int32_t *r = s->r;
+    39069:  248:	uint32_t *u = (uint32_t *)s->r;
+        -:  249:	uint32_t ptr_l, ptr_s;
+        -:  250:
+    39069:  251:	if ((s->status && (s->cause & s->mask)) || s->exception){
+    #####:  252:		s->epc = s->pc_next;
+    #####:  253:		s->pc = s->vector;
+    #####:  254:		s->pc_next = s->vector + 4;
+    #####:  255:		s->status = 0;
+    #####:  256:		s->exception = 0;
+    #####:  257:		for (i = 0; i < 4; i++)
+    #####:  258:			s->status_dly[i] = 0;
+        -:  259:	}
+        -:  260:
+    39069:  261:	inst = mem_fetch(s, s->pc);
+        -:  262:
+    39069:  263:	opcode = inst & 0x7f;
+    39069:  264:	rd = (inst >> 7) & 0x1f;
+    39069:  265:	rs1 = (inst >> 15) & 0x1f;
+    39069:  266:	rs2 = (inst >> 20) & 0x1f;
+    39069:  267:	funct3 = (inst >> 12) & 0x7;
+    39069:  268:	funct7 = (inst >> 25) & 0x7f;
+    39069:  269:	imm_i = (inst & 0xfff00000) >> 20;
+    39069:  270:	imm_s = ((inst & 0xf80) >> 7) | ((inst & 0xfe000000) >> 20);
+    39069:  271:	imm_sb = ((inst & 0xf00) >> 7) | ((inst & 0x7e000000) >> 20) | ((inst & 0x80) << 4) | ((inst & 0x80000000) >> 19);
+    39069:  272:	imm_u = inst & 0xfffff000;
+    39069:  273:	imm_uj = ((inst & 0x7fe00000) >> 20) | ((inst & 0x100000) >> 9) | (inst & 0xff000) | ((inst & 0x80000000) >> 11);
+    39069:  274:	if (inst & 0x80000000){
+     8066:  275:		imm_i |= 0xfffff000;
+     8066:  276:		imm_s |= 0xfffff000;
+     8066:  277:		imm_sb |= 0xffffe000;
+     8066:  278:		imm_uj |= 0xffe00000;
+        -:  279:	}
+    39069:  280:	ptr_l = r[rs1] + (int32_t)imm_i;
+    39069:  281:	ptr_s = r[rs1] + (int32_t)imm_s;
+    39069:  282:	r[0] = 0;
+        -:  283:
+    39069:  284:	switch (opcode){
+     1345:  285:		case 0x37: r[rd] = imm_u; break;										/* LUI */
+        6:  286:		case 0x17: r[rd] = s->pc + imm_u; break;									/* AUIPC */
+     1709:  287:		case 0x6f: r[rd] = s->pc_next; s->pc_next = s->pc + imm_uj; break;						/* JAL */
+      996:  288:		case 0x67: r[rd] = s->pc_next; s->pc_next = (r[rs1] + imm_i) & 0xfffffffe; break;				/* JALR */
+     8848:  289:		case 0x63:
+     8848:  290:			switch (funct3){
+     3311:  291:				case 0x0: if (r[rs1] == r[rs2]){ s->pc_next = s->pc + imm_sb; } break;				/* BEQ */
+     3317:  292:				case 0x1: if (r[rs1] != r[rs2]){ s->pc_next = s->pc + imm_sb; } break;				/* BNE */
+      577:  293:				case 0x4: if (r[rs1] < r[rs2]){ s->pc_next = s->pc + imm_sb; } break;				/* BLT */
+      310:  294:				case 0x5: if (r[rs1] >= r[rs2]){ s->pc_next = s->pc + imm_sb; } break;				/* BGE */
+     1110:  295:				case 0x6: if (u[rs1] < u[rs2]){ s->pc_next = s->pc + imm_sb; } break;				/* BLTU */
+      223:  296:				case 0x7: if (u[rs1] >= u[rs2]){ s->pc_next = s->pc + imm_sb; } break;				/* BGEU */
+    #####:  297:				default: goto fail;
+        -:  298:			}
+     8848:  299:			break;
+     2540:  300:		case 0x3:
+     2540:  301:			switch (funct3){
+    #####:  302:				case 0x0: r[rd] = (int8_t)mem_read(s,1,ptr_l); break;						/* LB */
+    #####:  303:				case 0x1: r[rd] = (int16_t)mem_read(s,2,ptr_l); break;						/* LH */
+     1921:  304:				case 0x2: r[rd] = mem_read(s,4,ptr_l); break;							/* LW */
+      619:  305:				case 0x4: r[rd] = (uint8_t)mem_read(s,1,ptr_l); break;						/* LBU */
+    #####:  306:				case 0x5: r[rd] = (uint16_t)mem_read(s,2,ptr_l); break;						/* LHU */
+    #####:  307:				default: goto fail;
+        -:  308:			}
+     2540:  309:			break;
+     2440:  310:		case 0x23:
+     2440:  311:			switch (funct3){
+      177:  312:				case 0x0: mem_write(s,1,ptr_s,r[rs2]); break;							/* SB */
+    #####:  313:				case 0x1: mem_write(s,2,ptr_s,r[rs2]); break;							/* SH */
+     2263:  314:				case 0x2: mem_write(s,4,ptr_s,r[rs2]); break;							/* SW */
+    #####:  315:				default: goto fail;
+        -:  316:			}
+     2439:  317:			break;
+    16835:  318:		case 0x13:
+    16835:  319:			switch (funct3){
+     6280:  320:				case 0x0: r[rd] = r[rs1] + (int32_t)imm_i; break;						/* ADDI */
+    #####:  321:				case 0x2: r[rd] = r[rs1] < (int32_t)imm_i; break;		 				/* SLTI */
+    #####:  322:				case 0x3: r[rd] = u[rs1] < (uint32_t)imm_i; break;						/* SLTIU */
+    #####:  323:				case 0x4: r[rd] = r[rs1] ^ (int32_t)imm_i; break;						/* XORI */
+        1:  324:				case 0x6: r[rd] = r[rs1] | (int32_t)imm_i; break;						/* ORI */
+     2138:  325:				case 0x7: r[rd] = r[rs1] & (int32_t)imm_i; break;						/* ANDI */
+     4127:  326:				case 0x1: r[rd] = u[rs1] << (rs2 & 0x3f); break;						/* SLLI */
+     4289:  327:				case 0x5:
+     4289:  328:					switch (funct7){
+     4241:  329:						case 0x0: r[rd] = u[rs1] >> (rs2 & 0x3f); break;				/* SRLI */
+       48:  330:						case 0x20: r[rd] = r[rs1] >> (rs2 & 0x3f); break;				/* SRAI */
+    #####:  331:						default: goto fail;
+        -:  332:					}
+     4289:  333:					break;
+    #####:  334:				default: goto fail;
+        -:  335:			}
+    16835:  336:			break;
+     4350:  337:		case 0x33:
+     4350:  338:			switch (funct3){
+     2391:  339:				case 0x0:
+     2391:  340:					switch (funct7){
+     1800:  341:						case 0x0: r[rd] = r[rs1] + r[rs2]; break;					/* ADD */
+      591:  342:						case 0x20: r[rd] = r[rs1] - r[rs2]; break;					/* SUB */
+    #####:  343:						default: goto fail;
+        -:  344:					}
+     2391:  345:					break;
+        4:  346:				case 0x1: r[rd] = r[rs1] << r[rs2]; break;							/* SLL */
+    #####:  347:				case 0x2: r[rd] = r[rs1] < r[rs2]; break;		 					/* SLT */
+      242:  348:				case 0x3: r[rd] = u[rs1] < u[rs2]; break;		 					/* SLTU */
+       12:  349:				case 0x4: r[rd] = r[rs1] ^ r[rs2]; break;							/* XOR */
+        4:  350:				case 0x5:
+        4:  351:					switch (funct7){
+        4:  352:						case 0x0: r[rd] = u[rs1] >> u[rs2]; break;					/* SRL */
+    #####:  353:						case 0x20: r[rd] = r[rs1] >> r[rs2]; break;					/* SRA */
+    #####:  354:						default: goto fail;
+        -:  355:					}
+        4:  356:					break;
+     1449:  357:				case 0x6: r[rd] = r[rs1] | r[rs2]; break;							/* OR */
+      248:  358:				case 0x7: r[rd] = r[rs1] & r[rs2]; break;							/* AND */
+    #####:  359:				default: goto fail;
+        -:  360:			}
+     4350:  361:			break;
+    #####:  362:		case 0x73:
+    #####:  363:			switch(funct3){
+    #####:  364:				case 0:
+    #####:  365:					switch(imm_i){
+    #####:  366:						case 0:										/* SCALL */
+    #####:  367:							s->exception = 1;
+    #####:  368:							break;
+    #####:  369:						case 1:	bp(s, inst); break;							/* SBREAK */
+    #####:  370:						default: goto fail;
+        -:  371:					}
+    #####:  372:					break;
+    #####:  373:				default: goto fail;
+        -:  374:			}
+    #####:  375:			break;
+    #####:  376:		default: goto fail;
+        -:  377:	}
+        -:  378:
+    39068:  379:	s->pc = s->pc_next;
+    39068:  380:	s->pc_next = s->pc_next + 4;
+    39068:  381:	s->status = s->status_dly[0];
+   156272:  382:	for (i = 0; i < 3; i++)
+   117204:  383:		s->status_dly[i] = s->status_dly[i+1];
+        -:  384:
+    39068:  385:	s->gpiocause = (s->pain ^ s->pain_inv) & s->pain_mask ? 0x01 : 0x00;
+    39068:  386:	if (s->timer0 & 0x10000) {
+    #####:  387:		s->timercause |= 0x01;
+        -:  388:	} else {
+    39068:  389:		s->timercause &= 0xfe;
+        -:  390:	}
+    39068:  391:	if (s->timer0 & 0x40000) {
+    #####:  392:		s->timercause |= 0x02;
+        -:  393:	} else {
+    39068:  394:		s->timercause &= 0xfd;
+        -:  395:	}
+    39068:  396:	if (s->timer1 == s->timer1_ctc) {
+        1:  397:		s->timer1 = 0;
+        1:  398:		s->timercause ^= 0x4;
+        -:  399:	}
+    39068:  400:	if (s->timer1 < s->timer1_ocr) {
+    #####:  401:		s->timercause |= 0x8;
+        -:  402:	} else {
+    39068:  403:		s->timercause &= 0xf7;
+        -:  404:	}
+    39068:  405:	s->s0cause = (s->gpiocause ^ s->gpiocause_inv) & s->gpiomask ? 0x02 : 0x00;
+    39068:  406:	s->s0cause |= (s->timercause ^ s->timercause_inv) & s->timermask ? 0x04 : 0x00;
+    39068:  407:	s->cause = s->s0cause ? 0x01 : 0x00;
+        -:  408:
+    39068:  409:	s->cycles++;
+    39068:  410:	s->timer0++;
+    39068:  411:	switch (s->timer1_pre) {
+    #####:  412:		case 1:
+    #####:  413:			if (!(s->timer0 & 3)) s->timer1++;
+    #####:  414:			break;
+    #####:  415:		case 2:
+    #####:  416:			if (!(s->timer0 & 15)) s->timer1++;
+    #####:  417:			break;
+    #####:  418:		case 3:
+    #####:  419:			if (!(s->timer0 & 63)) s->timer1++;
+    #####:  420:			break;
+    #####:  421:		case 4:
+    #####:  422:			if (!(s->timer0 & 255)) s->timer1++;
+    #####:  423:			break;
+    #####:  424:		case 5:
+    #####:  425:			if (!(s->timer0 & 1023)) s->timer1++;
+    #####:  426:			break;
+    #####:  427:		case 6:
+    #####:  428:			if (!(s->timer0 & 4095)) s->timer1++;
+    #####:  429:			break;
+    #####:  430:		case 7:
+    #####:  431:			if (!(s->timer0 & 16383)) s->timer1++;
+    #####:  432:			break;
+    39068:  433:		default:
+    39068:  434:			s->timer1++;
+        -:  435:	}
+    39068:  436:	s->timer1 &= 0xffff;
+        -:  437:
+    78136:  438:	return;
+    #####:  439:fail:
+    #####:  440:	printf("\ninvalid opcode (pc=0x%x opcode=0x%x)", s->pc, inst);
+    #####:  441:	exit(0);
+        -:  442:}
+        -:  443:
+        1:  444:int main(int argc, char *argv[]){
+        -:  445:	state context;
+        -:  446:	state *s;
+        -:  447:	FILE *in;
+        -:  448:	int bytes;
+        -:  449:
+        1:  450:	s = &context;
+        1:  451:	memset(s, 0, sizeof(state));
+        1:  452:	memset(sram, 0xff, sizeof(MEM_SIZE));
+        -:  453:
+        1:  454:	if (argc >= 2){
+        1:  455:		in = fopen(argv[1], "rb");
+        1:  456:		if (in == 0){
+    #####:  457:			printf("\nerror opening binary file.\n");
+    #####:  458:			return 1;
+        -:  459:		}
+        1:  460:		bytes = fread(&sram, 1, MEM_SIZE, in);
+        1:  461:		fclose(in);
+        1:  462:		if (bytes == 0){
+    #####:  463:			printf("\nerror reading binary file.\n");
+    #####:  464:			return 1;
+        -:  465:		}
+        1:  466:		if (argc == 3){
+    #####:  467:			fptr = fopen(argv[2], "wb");
+    #####:  468:			if (!fptr){
+    #####:  469:				printf("\nerror reading binary file.\n");
+    #####:  470:				return 1;
+        -:  471:			}
+    #####:  472:			log_enabled = 1;
+        -:  473:		}
+        -:  474:	}else{
+    #####:  475:		printf("\nsyntax: hf_risc_sim [file.bin] [logfile.txt]\n");
+    #####:  476:		return 1;
+        -:  477:	}
+        -:  478:
+        1:  479:	memset(s, 0, sizeof(context));
+        1:  480:	s->pc = SRAM_BASE;
+        1:  481:	s->pc_next = s->pc + 4;
+        1:  482:	s->mem = &sram[0];
+        1:  483:	s->r[2] = MEM_SIZE - 4;
+        1:  484:	s->exception = 0;
+        -:  485:
+        -:  486:	for(;;){
+    78137:  487:		if (s->timer0 & 0x80000) {
+    #####:  488:			s->pain |= 0x8;
+        -:  489:		} else {
+    39069:  490:			s->pain &= ~0x8;
+        -:  491:		}
+    39069:  492:		cycle(s);
+        -:  493:	}
+        -:  494:
+        -:  495:	return 0;
+        -:  496:}
+        -:  497:
