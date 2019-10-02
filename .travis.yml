@@ -15,6 +15,9 @@ install:
 - "[ $CXX = g++ ] && export CXX=g++-6 || true"
 - sudo pip install gdown
 - ./instal.sh
+- export HFOS_ROOT=$PWD
+- echo $PWD
+
 script:
   - cd ./software/tests/math/cos
   - make clean
